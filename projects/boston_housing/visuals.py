@@ -1,17 +1,13 @@
+## Python Script For Creating Visuals
+
 ###########################################
-# Suppress matplotlib user warnings
-# Necessary for newer version of matplotlib
-import warnings
-warnings.filterwarnings("ignore", category = UserWarning, module = "matplotlib")
-#
 # Display inline matplotlib plots with IPython
 from IPython import get_ipython
 get_ipython().run_line_magic('matplotlib', 'inline')
 ###########################################
-
 import matplotlib.pyplot as pl
 import numpy as np
-import sklearn.learning_curve as curves
+from sklearn.model_selection import learning_curve as curves
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.cross_validation import ShuffleSplit, train_test_split
 
@@ -64,7 +60,6 @@ def ModelLearning(X, y):
     ax.legend(bbox_to_anchor=(1.05, 2.05), loc='lower left', borderaxespad = 0.)
     fig.suptitle('Decision Tree Regressor Learning Performances', fontsize = 16, y = 1.03)
     fig.tight_layout()
-    fig.show()
 
 
 def ModelComplexity(X, y):
@@ -102,7 +97,6 @@ def ModelComplexity(X, y):
     pl.xlabel('Maximum Depth')
     pl.ylabel('Score')
     pl.ylim([-0.05,1.05])
-    pl.show()
 
 
 def PredictTrials(X, y, fitter, data):
@@ -124,7 +118,7 @@ def PredictTrials(X, y, fitter, data):
         prices.append(pred)
         
         # Result
-        print "Trial {}: ${:,.2f}".format(k+1, pred)
+        print("Trial {}: ${:,.2f}".format(k+1, pred))
 
     # Display price range
-    print "\nRange in prices: ${:,.2f}".format(max(prices) - min(prices))
+    print("\nRange in prices: ${:,.2f}".format(max(prices) - min(prices)))
