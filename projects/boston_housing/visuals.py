@@ -1,22 +1,20 @@
-## Python Script For Creating Visuals
-
 ###########################################
 # Display inline matplotlib plots with IPython
 from IPython import get_ipython
 get_ipython().run_line_magic('matplotlib', 'inline')
 ###########################################
+
 import matplotlib.pyplot as pl
 import numpy as np
-from sklearn.model_selection import learning_curve as curves
 from sklearn.tree import DecisionTreeRegressor
-from sklearn.cross_validation import ShuffleSplit, train_test_split
+from sklearn.model_selection import ShuffleSplit, train_test_split, learning_curve, validation_curve
 
 def ModelLearning(X, y):
     """ Calculates the performance of several models with varying sizes of training data.
         The learning and testing scores for each model are then plotted. """
     
     # Create 10 cross-validation sets for training and testing
-    cv = ShuffleSplit(X.shape[0], n_iter = 10, test_size = 0.2, random_state = 0)
+    cv = ShuffleSplit(X.shape[0], test_size = 0.2, random_state = 0)
 
     # Generate the training set sizes increasing by 50
     train_sizes = np.rint(np.linspace(1, X.shape[0]*0.8 - 1, 9)).astype(int)
@@ -26,13 +24,11 @@ def ModelLearning(X, y):
 
     # Create three different models based on max_depth
     for k, depth in enumerate([1,3,6,10]):
-        
         # Create a Decision tree regressor at max_depth = depth
         regressor = DecisionTreeRegressor(max_depth = depth)
 
         # Calculate the training and testing scores
-        sizes, train_scores, test_scores = curves.learning_curve(regressor, X, y, \
-            cv = cv, train_sizes = train_sizes, scoring = 'r2')
+        sizes, train_scores, test_scores = learning_curve(regressor, X, y, cv = cv, train_sizes = train_sizes)
         
         # Find the mean and standard deviation for smoothing
         train_std = np.std(train_scores, axis = 1)
@@ -60,6 +56,7 @@ def ModelLearning(X, y):
     ax.legend(bbox_to_anchor=(1.05, 2.05), loc='lower left', borderaxespad = 0.)
     fig.suptitle('Decision Tree Regressor Learning Performances', fontsize = 16, y = 1.03)
     fig.tight_layout()
+    fig.show()
 
 
 def ModelComplexity(X, y):
@@ -67,13 +64,13 @@ def ModelComplexity(X, y):
         The learning and testing errors rates are then plotted. """
     
     # Create 10 cross-validation sets for training and testing
-    cv = ShuffleSplit(X.shape[0], n_iter = 10, test_size = 0.2, random_state = 0)
+    cv = ShuffleSplit(X.shape[0], test_size = 0.2, random_state = 0)
 
     # Vary the max_depth parameter from 1 to 10
     max_depth = np.arange(1,11)
 
     # Calculate the training and testing scores
-    train_scores, test_scores = curves.validation_curve(DecisionTreeRegressor(), X, y, \
+    train_scores, test_scores = validation_curve(DecisionTreeRegressor(), X, y, \
         param_name = "max_depth", param_range = max_depth, cv = cv, scoring = 'r2')
 
     # Find the mean and standard deviation for smoothing
@@ -97,6 +94,7 @@ def ModelComplexity(X, y):
     pl.xlabel('Maximum Depth')
     pl.ylabel('Score')
     pl.ylim([-0.05,1.05])
+    pl.show()
 
 
 def PredictTrials(X, y, fitter, data):
@@ -118,7 +116,9 @@ def PredictTrials(X, y, fitter, data):
         prices.append(pred)
         
         # Result
-        print("Trial {}: ${:,.2f}".format(k+1, pred))
+        print "Trial {}: ${:,.2f}".format(k+1, pred)
 
     # Display price range
-    print("\nRange in prices: ${:,.2f}".format(max(prices) - min(prices)))
+    print "\nRange in prices: ${:,.2f}".format(max(prices) - min(prices))
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
