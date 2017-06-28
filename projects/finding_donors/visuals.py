@@ -3,7 +3,7 @@
 # Necessary for newer version of matplotlib
 import warnings
 warnings.filterwarnings("ignore", category = UserWarning, module = "matplotlib")
-#
+
 # Display inline matplotlib plots with IPython
 from IPython import get_ipython
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -18,9 +18,7 @@ from sklearn.metrics import f1_score, accuracy_score
 
 
 def distribution(data, transformed = False):
-    """
-    Visualization code for displaying skewed distributions of features
-    """
+    # Visualization code for displaying skewed distributions of features
     
     # Create figure
     fig = pl.figure(figsize = (11,5));
