@@ -3,17 +3,18 @@
 # Necessary for newer version of matplotlib
 import warnings
 warnings.filterwarnings("ignore", category = UserWarning, module = "matplotlib")
-#
 # Display inline matplotlib plots with IPython
 from IPython import get_ipython
 get_ipython().run_line_magic('matplotlib', 'inline')
 ###########################################
 
+# Imports
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import pandas as pd
 import numpy as np
 
+# Functions
 def pca_results(good_data, pca):
 	'''
 	Create a DataFrame of the PCA results
@@ -132,7 +133,7 @@ def channel_results(reduced_data, outliers, pca_samples):
 	try:
 	    full_data = pd.read_csv("customers.csv")
 	except:
-	    print "Dataset could not be loaded. Is the file missing?"
+	    print("Dataset could not be loaded. Is the file missing?")
 	    return False
 
 	# Create the Channel DataFrame
