@@ -4,19 +4,19 @@
 import warnings
 warnings.filterwarnings("ignore", category = UserWarning, module = "matplotlib")
 ###########################################
-#
 # Display inline matplotlib plots with IPython
 from IPython import get_ipython
 get_ipython().run_line_magic('matplotlib', 'inline')
 ###########################################
 
+# Imports
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import os
 import ast
 
-
+# Functions
 def calculate_safety(data):
 	""" Calculates the safety rating of the smartcab during testing. """
 
@@ -66,8 +66,8 @@ def plot_trials(csv):
 	data = pd.read_csv(os.path.join("logs", csv))
 
 	if len(data) < 10:
-		print "Not enough data collected to create a visualization."
-		print "At least 20 trials are required."
+		print("Not enough data collected to create a visualization.")
+		print("At least 20 trials are required.")
 		return
 	
 	# Create additional features
