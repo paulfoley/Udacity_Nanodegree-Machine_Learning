@@ -1,3 +1,5 @@
+# Creates the Simulator for the Smart Cab
+
 ###########################################
 # Suppress matplotlib user warnings
 # Necessary for newer version of matplotlib
@@ -5,15 +7,17 @@ import warnings
 warnings.filterwarnings("ignore", category = UserWarning, module = "matplotlib")
 ###########################################
 
+# Imports
 import os
 import time
 import random
 import importlib
 import csv
 
+# Class Creation
 class Simulator(object):
-    """Simulates agents in a dynamic smartcab environment.
-
+    """
+    Simulates agents in a dynamic smartcab environment.
     Uses PyGame to display GUI, if available.
     """
 
@@ -78,10 +82,10 @@ class Simulator(object):
                 self.paused = False
             except ImportError as e:
                 self.display = False
-                print "Simulator.__init__(): Unable to import pygame; display disabled.\n{}: {}".format(e.__class__.__name__, e)
+                print("Simulator.__init__(): Unable to import pygame; display disabled.\n{}: {}".format(e.__class__.__name__, e))
             except Exception as e:
                 self.display = False
-                print "Simulator.__init__(): Error initializing GUI objects; display disabled.\n{}: {}".format(e.__class__.__name__, e)
+                print("Simulator.__init__(): Error initializing GUI objects; display disabled.\n{}: {}".format(e.__class__.__name__, e))
 
         # Setup metrics to report
         self.log_metrics = log_metrics
@@ -109,12 +113,12 @@ class Simulator(object):
             self.log_writer.writeheader()
 
     def run(self, tolerance=0.05, n_test=0):
-        """ Run a simulation of the environment. 
-
-        'tolerance' is the minimum epsilon necessary to begin testing (if enabled)
-        'n_test' is the number of testing trials simulated
-
-        Note that the minimum number of training trials is always 20. """
+        """
+        Run a simulation of the environment. 
+        'tolerance' - the minimum epsilon necessary to begin testing (if enabled)
+        'n_test' - the number of testing trials simulated
+        Note: that the minimum number of training trials is always 20.
+        """
 
         self.quit = False
 
@@ -126,7 +130,6 @@ class Simulator(object):
         trial = 1
 
         while True:
-
             # Flip testing switch
             if not testing:
                 if total_trials > 20: # Must complete minimum 20 training trials
@@ -144,15 +147,15 @@ class Simulator(object):
                     break
 
             # Pretty print to terminal
-            print 
-            print "/-------------------------"
+            print()
+            print("/-------------------------")
             if testing:
-                print "| Testing trial {}".format(trial)
+                print("| Testing trial {}".format(trial))
             else:
-                print "| Training trial {}".format(trial)
+                print("| Training trial {}".format(trial))
 
-            print "\-------------------------"
-            print 
+            print("\-------------------------")
+            print() 
 
             self.env.reset(testing)
             self.current_time = 0.0
@@ -214,11 +217,11 @@ class Simulator(object):
 
             # Trial finished
             if self.env.success == True:
-                print "\nTrial Completed!"
-                print "Agent reached the destination."
+                print("\nTrial Completed!")
+                print("Agent reached the destination.")
             else:
-                print "\nTrial Aborted!"
-                print "Agent did not reach the destination."
+                print("\nTrial Aborted!")
+                print("Agent did not reach the destination.")
 
             # Increment
             total_trials = total_trials + 1
@@ -243,66 +246,70 @@ class Simulator(object):
 
             self.log_file.close()
 
-        print "\nSimulation ended. . . "
+        print("\nSimulation ended. . . ")
 
         # Report final metrics
         if self.display:
             self.pygame.display.quit()  # shut down pygame
 
     def render_text(self, trial, testing=False):
-        """ This is the non-GUI render display of the simulation. 
-            Simulated trial data will be rendered in the terminal/command prompt. """
+        """
+        This is the non-GUI render display of the simulation. 
+        Simulated trial data will be rendered in the terminal/command prompt.
+        """
 
         status = self.env.step_data
         if status and status['waypoint'] is not None: # Continuing the trial
 
             # Previous State
             if status['state']:
-                print "Agent previous state: {}".format(status['state'])
+                print("Agent previous state: {}".format(status['state']))
             else:
-                print "!! Agent state not been updated!"
+                print("!! Agent state not been updated!")
 
             # Result
             if status['violation'] == 0: # Legal
                 if status['waypoint'] == status['action']: # Followed waypoint
-                    print "Agent followed the waypoint {}. (rewarded {:.2f})".format(status['action'], status['reward'])
+                    print("Agent followed the waypoint {}. (rewarded {:.2f})".format(status['action'], status['reward']))
                 elif status['action'] == None:
                     if status['light'] == 'red': # Stuck at red light
-                        print "Agent properly idled at a red light. (rewarded {:.2f})".format(status['reward'])
+                        print("Agent properly idled at a red light. (rewarded {:.2f})".format(status['reward']))
                     else:
-                        print "Agent idled at a green light with oncoming traffic. (rewarded {:.2f})".format(status['reward'])
+                        print("Agent idled at a green light with oncoming traffic. (rewarded {:.2f})".format(status['reward']))
                 else: # Did not follow waypoint
-                    print "Agent drove {} instead of {}. (rewarded {:.2f})".format(status['action'], status['waypoint'], status['reward'])
+                    print("Agent drove {} instead of {}. (rewarded {:.2f})".format(status['action'], status['waypoint'], status['reward']))
             else: # Illegal
                 if status['violation'] == 1: # Minor violation
-                    print "Agent idled at a green light with no oncoming traffic. (rewarded {:.2f})".format(status['reward'])
+                    print("Agent idled at a green light with no oncoming traffic. (rewarded {:.2f})".format(status['reward']))
                 elif status['violation'] == 2: # Major violation
-                    print "Agent attempted driving {} through a red light. (rewarded {:.2f})".format(status['action'], status['reward'])
+                    print("Agent attempted driving {} through a red light. (rewarded {:.2f})".format(status['action'], status['reward']))
                 elif status['violation'] == 3: # Minor accident
-                    print "Agent attempted driving {} through traffic and cause a minor accident. (rewarded {:.2f})".format(status['action'], status['reward'])
+                    print("Agent attempted driving {} through traffic and cause a minor accident. (rewarded {:.2f})".format(status['action'], status['reward']))
                 elif status['violation'] == 4: # Major accident
-                    print "Agent attempted driving {} through a red light with traffic and cause a major accident. (rewarded {:.2f})".format(status['action'], status['reward'])
+                    print("Agent attempted driving {} through a red light with traffic and cause a major accident. (rewarded {:.2f})".format(status['action'], status['reward']))
            
             # Time Remaining
             if self.env.enforce_deadline:
                 time = (status['deadline'] - 1) * 100.0 / (status['t'] + status['deadline'])
-                print "{:.0f}% of time remaining to reach destination.".format(time)
+                print("{:.0f}% of time remaining to reach destination.".format(time))
             else:
-                print "Agent not enforced to meet deadline."
+                print("Agent not enforced to meet deadline.")
 
         # Starting new trial
         else:
             a = self.env.primary_agent
-            print "Simulating trial. . . "
+            print("Simulating trial. . . ")
             if a.learning:
-                print "epsilon = {:.4f}; alpha = {:.4f}".format(a.epsilon, a.alpha)
+                print("epsilon = {:.4f}; alpha = {:.4f}".format(a.epsilon, a.alpha))
             else:
-                print "Agent not set to learn."
+                print("Agent not set to learn.")
 
                 
     def render(self, trial, testing=False):
-        """ This is the GUI render display of the simulation. 
-            Supplementary trial data can be found from render_text. """
+        """
+        This is the GUI render display of the simulation. 
+        Supplementary trial data can be found from render_text.
+        """
         
         # Reset the screen.
         self.screen.fill(self.bg_color)
@@ -446,14 +453,17 @@ class Simulator(object):
         self.pygame.display.flip()
 
     def pause(self):
-        """ When the GUI is enabled, this function will pause the simulation. """
+        """
+        When the GUI is enabled, 
+        this function will pause the simulation.
+        """
         
         abs_pause_time = time.time()
         self.font = self.pygame.font.Font(None, 30)
         pause_text = "Simulation Paused. Press any key to continue. . ."
         self.screen.blit(self.font.render(pause_text, True, self.colors['red'], self.bg_color), (400, self.height - 30))
         self.pygame.display.flip()
-        print pause_text
+        print(pause_text)
         while self.paused:
             for event in self.pygame.event.get():
                 if event.type == self.pygame.KEYDOWN:

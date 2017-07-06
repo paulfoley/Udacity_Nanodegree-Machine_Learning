@@ -1,12 +1,17 @@
+## Creates the Environment for the Smart Cab
+
+# Imports
 import time
 import random
 import math
 from collections import OrderedDict
 from simulator import Simulator
 
-
+# Creates Classes
 class TrafficLight(object):
-    """A traffic light that switches periodically."""
+    """
+    A traffic light that switches periodically.
+    """
 
     valid_states = [True, False]  # True = NS open; False = EW open
 
@@ -23,12 +28,17 @@ class TrafficLight(object):
             self.state = not self.state  # Assuming state is boolean
             self.last_updated = t
 
-
 class Environment(object):
-    """Environment within which all agents operate."""
-
+    """
+    Environment within which all agents operate.
+    """
     valid_actions = [None, 'forward', 'left', 'right']
-    valid_inputs = {'light': TrafficLight.valid_states, 'oncoming': valid_actions, 'left': valid_actions, 'right': valid_actions}
+    valid_inputs = {
+                    'light': TrafficLight.valid_states,
+                    'oncoming': valid_actions, 
+                    'left': valid_actions, 
+                    'right': valid_actions
+                    }
     valid_headings = [(1, 0), (0, -1), (-1, 0), (0, 1)]  # E, N, W, S
     hard_time_limit = -100  # Set a hard time limit even if deadline is not enforced.
 
@@ -50,8 +60,8 @@ class Environment(object):
         self.hang = 0.6
         self.intersections = OrderedDict()
         self.roads = []
-        for x in xrange(self.bounds[0], self.bounds[2] + 1):
-            for y in xrange(self.bounds[1], self.bounds[3] + 1):
+        for x in range(self.bounds[0], self.bounds[2] + 1):
+            for y in range(self.bounds[1], self.bounds[3] + 1):
                 self.intersections[(x, y)] = TrafficLight()  # A traffic light at each intersection
 
         for a in self.intersections:
@@ -62,20 +72,20 @@ class Environment(object):
                     self.roads.append((a, b))
 
         # Add environment boundaries
-        for x in xrange(self.bounds[0], self.bounds[2] + 1):
+        for x in range(self.bounds[0], self.bounds[2] + 1):
             self.roads.append(((x, self.bounds[1] - self.hang), (x, self.bounds[1])))
             self.roads.append(((x, self.bounds[3] + self.hang), (x, self.bounds[3])))
-        for y in xrange(self.bounds[1], self.bounds[3] + 1):
+        for y in range(self.bounds[1], self.bounds[3] + 1):
             self.roads.append(((self.bounds[0] - self.hang, y), (self.bounds[0], y)))
             self.roads.append(((self.bounds[2] + self.hang, y), (self.bounds[2], y)))    
 
         # Create dummy agents
-        for i in xrange(self.num_dummies):
+        for i in range(self.num_dummies):
             self.create_agent(DummyAgent)
 
         # Primary agent and associated parameters
         self.primary_agent = None  # to be set explicitly
-        self.enforce_deadline = False
+        self.enforce_deadline = True
 
         # Trial data (updated at the end of each trial)
         self.trial_data = {
@@ -89,22 +99,28 @@ class Environment(object):
         }
 
     def create_agent(self, agent_class, *args, **kwargs):
-        """ When called, create_agent creates an agent in the environment. """
+        """
+        When called, create_agent creates an agent in the environment.
+        """
 
         agent = agent_class(self, *args, **kwargs)
         self.agent_states[agent] = {'location': random.choice(self.intersections.keys()), 'heading': (0, 1)}
         return agent
 
     def set_primary_agent(self, agent, enforce_deadline=False):
-        """ When called, set_primary_agent sets 'agent' as the primary agent.
-            The primary agent is the smartcab that is followed in the environment. """
+        """ 
+        When called, set_primary_agent sets 'agent' as the primary agent.
+        The primary agent is the smartcab that is followed in the environment.
+        """
 
         self.primary_agent = agent
         agent.primary_agent = True
         self.enforce_deadline = enforce_deadline
 
     def reset(self, testing=False):
-        """ This function is called at the beginning of a new trial. """
+        """
+        This function is called at the beginning of a new trial.
+        """
 
         self.done = False
         self.t = 0
@@ -129,7 +145,7 @@ class Environment(object):
         distance = self.compute_dist(start, destination)
         deadline = distance * 5 # 5 time steps per intersection away
         if(self.verbose == True): # Debugging
-            print "Environment.reset(): Trial set up with start = {}, destination = {}, deadline = {}".format(start, destination, deadline)
+            print("Environment.reset(): Trial set up with start = {}, destination = {}, deadline = {}".format(start, destination, deadline))
 
         # Create a map of all possible initial positions
         positions = dict()
@@ -177,17 +193,19 @@ class Environment(object):
                 self.trial_data['success'] = 0
 
     def step(self):
-        """ This function is called when a time step is taken turing a trial. """
+        """
+        This function is called when a time step is taken turing a trial.
+        """
 
         # Pretty print to terminal
-        print ""
-        print "/-------------------"
-        print "| Step {} Results".format(self.t)
-        print "\-------------------"
-        print ""
+        print("")
+        print("/-------------------")
+        print("| Step {} Results".format(self.t))
+        print("\-------------------")
+        print("")
 
         if(self.verbose == True): # Debugging
-            print "Environment.step(): t = {}".format(self.t)
+            print("Environment.step(): t = {}".format(self.t))
 
         # Update agents, primary first
         if self.primary_agent is not None:
@@ -210,18 +228,20 @@ class Environment(object):
                 self.done = True
                 self.success = False
                 if self.verbose: # Debugging
-                    print "Environment.step(): Primary agent hit hard time limit ({})! Trial aborted.".format(self.hard_time_limit)
+                    print("Environment.step(): Primary agent hit hard time limit ({})! Trial aborted.".format(self.hard_time_limit))
             elif self.enforce_deadline and agent_deadline <= 0:
                 self.done = True
                 self.success = False
                 if self.verbose: # Debugging
-                    print "Environment.step(): Primary agent ran out of time! Trial aborted."
+                    print("Environment.step(): Primary agent ran out of time! Trial aborted.")
 
         self.t += 1
 
     def sense(self, agent):
-        """ This function is called when information is requested about the sensor
-            inputs from an 'agent' in the environment. """
+        """ 
+        This function is called when information is requested 
+        about the sensor inputs from an 'agent' in the environment.
+        """
 
         assert agent in self.agent_states, "Unknown agent!"
 
@@ -255,13 +275,17 @@ class Environment(object):
         return {'light': light, 'oncoming': oncoming, 'left': left, 'right': right}
 
     def get_deadline(self, agent):
-        """ Returns the deadline remaining for an agent. """
+        """
+        Returns the deadline remaining for an agent.
+        """
 
         return self.agent_states[agent]['deadline'] if agent is self.primary_agent else None
 
     def act(self, agent, action):
-        """ Consider an action and perform the action if it is legal.
-            Receive a reward for the agent based on traffic laws. """
+        """
+        Consider an action and perform the action if it is legal.
+        Receive a reward for the agent based on traffic laws.
+        """
 
         assert agent in self.agent_states, "Unknown agent!"
         assert action in self.valid_actions, "Invalid action!"
@@ -369,10 +393,10 @@ class Environment(object):
                 self.success = True
 
                 if(self.verbose == True): # Debugging
-                    print "Environment.act(): Primary agent has reached destination!"
+                    print("Environment.act(): Primary agent has reached destination!")
 
             if(self.verbose == True): # Debugging
-                print "Environment.act() [POST]: location: {}, heading: {}, action: {}, reward: {}".format(location, heading, action, reward)
+                print("Environment.act() [POST]: location: {}, heading: {}, action: {}, reward: {}".format(location, heading, action, reward))
 
             # Update metrics
             self.step_data['t'] = self.t
@@ -390,11 +414,13 @@ class Environment(object):
             self.trial_data['actions'][violation] += 1
 
             if(self.verbose == True): # Debugging
-                print "Environment.act(): Step data: {}".format(self.step_data)
+                print("Environment.act(): Step data: {}".format(self.step_data))
         return reward
 
     def compute_dist(self, a, b):
-        """ Compute the Manhattan (L1) distance of a spherical world. """
+        """
+        Compute the Manhattan (L1) distance of a spherical world.
+        """
 
         dx1 = abs(b[0] - a[0])
         dx2 = abs(self.grid_size[0] - dx1)
@@ -407,9 +433,10 @@ class Environment(object):
 
         return dx + dy
 
-
 class Agent(object):
-    """Base class for all agents."""
+    """
+    Base class for all agents.
+    """
 
     def __init__(self, env):
         self.env = env
@@ -430,7 +457,6 @@ class Agent(object):
     def get_next_waypoint(self):
         return self.next_waypoint  
 
-
 class DummyAgent(Agent):
     color_choices = ['cyan', 'red', 'blue', 'green', 'orange', 'magenta', 'yellow']
 
@@ -440,7 +466,9 @@ class DummyAgent(Agent):
         self.color = random.choice(self.color_choices)
 
     def update(self):
-        """ Update a DummyAgent to move randomly under legal traffic laws. """
+        """
+        Update a DummyAgent to move randomly under legal traffic laws.
+        """
 
         inputs = self.env.sense(self)
 

@@ -1,7 +1,13 @@
+## Creates the Router Planning for the Smart Cab
+
+# Imports
 import random
 
+# Create Class
 class RoutePlanner(object):
-    """ Complex route planner that is meant for a perpendicular grid network. """
+    """
+    Complex route planner that is meant for a perpendicular grid network.
+    """
 
     def __init__(self, env, agent):
         self.env = env
@@ -9,13 +15,18 @@ class RoutePlanner(object):
         self.destination = None
 
     def route_to(self, destination=None):
-        """ Select the destination if one is provided, otherwise choose a random intersection. """
+        """
+        Select the destination if one is provided, 
+        otherwise choose a random intersection.
+        """
 
         self.destination = destination if destination is not None else random.choice(self.env.intersections.keys())
 
     def next_waypoint(self):
-        """ Creates the next waypoint based on current heading, location,
-            intended destination and L1 distance from destination. """
+        """
+        Creates the next waypoint based on current heading, location,
+        intended destination and L1 distance from destination.
+        """
 
         # Collect global location details
         bounds = self.env.grid_size

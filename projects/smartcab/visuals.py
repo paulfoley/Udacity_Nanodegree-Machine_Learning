@@ -18,7 +18,9 @@ import ast
 
 # Functions
 def calculate_safety(data):
-	""" Calculates the safety rating of the smartcab during testing. """
+	"""
+	Calculates the safety rating of the smartcab during testing.
+	"""
 
 	good_ratio = data['good_actions'].sum() * 1.0 / \
 	(data['initial_deadline'] - data['final_deadline']).sum()
@@ -63,7 +65,7 @@ def calculate_reliability(data):
 def plot_trials(csv):
 	""" Plots the data from logged metrics during a simulation."""
 
-	data = pd.read_csv(os.path.join("logs", csv))
+	data = pd.read_csv(os.path.join("smartcab/logs/", csv))
 
 	if len(data) < 10:
 		print("Not enough data collected to create a visualization.")
