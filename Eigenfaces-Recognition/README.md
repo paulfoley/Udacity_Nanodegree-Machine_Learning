@@ -1,6 +1,6 @@
 # Project - Eigenface Predictions
 
-Facial recognition is one of the biggest use cases in machine learning! To experiment with facial recognition, the [University of Massachusetts](http://vis-www.cs.umass.edu/lfw/) has provided, a labeled face data set `fetch_lfw_people` that any machine learning enthusiast can play with.
+Facial recognition is one of the most used applications of machine learning! To experiment with facial recognition, the [University of Massachusetts](http://vis-www.cs.umass.edu/lfw/) has provided a labeled face data set `fetch_lfw_people`.
 
 
 ## Project Overview
