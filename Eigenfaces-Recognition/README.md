@@ -1,6 +1,6 @@
 # Project - Eigenface Predictions
 
-Facial recognition is all the rage in the machine learning community. To experiment with facial recognition, the [University of Massachusetts](http://vis-www.cs.umass.edu/lfw/) has an open sourced labeled face data set `fetch_lfw_people` that any enthusiast can use.
+Facial recognition is one of the biggest use cases in machine learning! To experiment with facial recognition, the [University of Massachusetts](http://vis-www.cs.umass.edu/lfw/) has provided, a labeled face data set `fetch_lfw_people` that any machine learning enthusiast can play with.
 
 
 ## Project Overview
@@ -28,10 +28,11 @@ You'll need to install:
 
 ### Output
 
-* `classification_report.csv` - A CSV file that shows the precision, recall, f1 score, and support for each person in the data set.
+* `classification_report.csv` - A CSV file that shows the precision, recall, f1, and support score for each person in the data set.
 * `confusion_matrix.csv` - A CSV file that shows how many of the faces were recognized correctly or incorrectly.
 
-* Eigenfaces:
+#### Eigenfaces
+
 ![Face Recognition](face_recognition.png)
 
 
