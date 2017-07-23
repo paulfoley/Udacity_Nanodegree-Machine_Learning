@@ -1,18 +1,25 @@
-###########################################
-# Display inline matplotlib plots with IPython
-from IPython import get_ipython
-get_ipython().run_line_magic('matplotlib', 'inline')
-###########################################
+'''
+Script to provide detailed visuals 
+In the Boston Housing Price Prediction IPython Notebook
+'''
 
+## Imports
+from IPython import get_ipython
+# Display inline matplotlib plots with IPython
+get_ipython().run_line_magic('matplotlib', 'inline')
 import matplotlib.pyplot as pl
 import numpy as np
+
+## sklearn Imports
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import ShuffleSplit, train_test_split, learning_curve, validation_curve
 
+## Functions
 def ModelLearning(X, y):
-    """ Calculates the performance of several models with varying sizes of training data.
-        The learning and testing scores for each model are then plotted. """
-    
+    """ 
+    Calculates the performance of several models with varying sizes of training data.
+    The learning and testing scores for each model are then plotted.
+    """
     # Create 10 cross-validation sets for training and testing
     cv = ShuffleSplit(X.shape[0], test_size = 0.2, random_state = 0)
 
@@ -58,11 +65,11 @@ def ModelLearning(X, y):
     fig.tight_layout()
     fig.show()
 
-
 def ModelComplexity(X, y):
-    """ Calculates the performance of the model as model complexity increases.
-        The learning and testing errors rates are then plotted. """
-    
+    """
+    Calculates the performance of the model as model complexity increases.
+    The learning and testing errors rates are then plotted.
+    """
     # Create 10 cross-validation sets for training and testing
     cv = ShuffleSplit(X.shape[0], test_size = 0.2, random_state = 0)
 
@@ -96,10 +103,10 @@ def ModelComplexity(X, y):
     pl.ylim([-0.05,1.05])
     pl.show()
 
-
 def PredictTrials(X, y, fitter, data):
-    """ Performs trials of fitting and predicting data. """
-
+    """
+    Performs trials of fitting and predicting data.
+    """
     # Store the predicted prices
     prices = []
 
