@@ -23,7 +23,7 @@ y_pred = KMeans(n_clusters=2, random_state=random_state).fit_predict(X)
 
 plt.subplot(221)
 plt.scatter(X[:, 0], X[:, 1], c=y_pred)
-plt.title("Incorrect Number of Blobs")
+plt.title("Incorrect Number of Clusters")
 
 ### Anisotropicly Distributed Data
 transformation = [[ 0.60834549, -0.63667341], [-0.40887718, 0.85253229]]
