@@ -1,32 +1,32 @@
 """
-Gaussian Naive Bayes (GaussianNB)
-Can perform online updates to model parameters via partial_fit method.
-
-For details on algorithm used to update feature means and variance online, 
-see Stanford CS tech report STAN-CS-79-773 by Chan, Golub, and LeVeque:
+Playing with Gaussian Naive Bayes (GaussianNB)
 """
-# Import Numpy and Gaussian NB
+## Import Numpy
 import numpy as np
+
+## Import Gaussian Naive Bayes
 from sklearn.naive_bayes import GaussianNB
 
-# Create Features
+## Create Features & Labels
 features = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
 labels = np.array([1, 1, 1, 2, 2, 2])
 
-# Create Classifier
-classifiers = GaussianNB()
+## Create Classifier
+classifier = GaussianNB()
 
-# Fit Classifier
-classifiers.fit(features, labels)
+## Fit Classifier
+classifier.fit(features, labels)
 
-# Predict
-predictions = classifiers.predict([[-0.8, -1]])
-print(predictions)
+## Predict
+prediction = classifier.predict([[-0.8, -1]])
 
-# Create Partial Fit Classifier and Fit
+## Create Partial Fit Classifier and Fit
 classifiers_partial_fit = GaussianNB()
 classifiers_partial_fit.partial_fit(features, labels, np.unique(labels))
 
-# Predict
-predicitons_partial_fit = classifiers_partial_fit.predict([[-0.8, -1]])
-print(predicitons_partial_fit )
+## Predict
+prediciton_partial_fit = classifiers_partial_fit.predict([[-0.8, -1]])
+
+## output
+print(prediction)
+print(prediciton_partial_fit)

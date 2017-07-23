@@ -1,12 +1,15 @@
-## Example of Linear Regression
+'''
+Playing with Linear Regression
+'''
 
-# Import
+## Import Linear Regression
 from sklearn.linear_model import LinearRegression
 
-# Create Regression
+## Create Regression
 regression = LinearRegression()
 
-# Fit Regression
+## Fit Regression
 regression.fit([[0, 0], [1, 1], [2, 2]], [0, 1, 2])
 
+## Output Coefficients
 print(regression.coef_)

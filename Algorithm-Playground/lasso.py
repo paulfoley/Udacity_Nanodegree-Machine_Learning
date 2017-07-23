@@ -1,20 +1,22 @@
-# Example of uisng Lasso Regression
+'''
+Playing with Lasso Regression
+'''
 
-# Import
+## Import Lasso
 from sklearn.linear_model import Lasso
 
-# Create Lasso Regression
+## Create Regression
 regression = Lasso(alpha = 0.1)
 
-# Fit Lasso Regression
+## Fit Regression
 regression.fit([[0, 0], [1, 1]], [0, 1])
 
-# Predict
+## Predict
 prediction = regression.predict([[1, 1]])
 
-# Get Regression Coefficients
+## Get Regression Coefficients
 coefficients = regression.coef_
 
-# Output
+## Output
 print(prediction)
 print(coefficients)
