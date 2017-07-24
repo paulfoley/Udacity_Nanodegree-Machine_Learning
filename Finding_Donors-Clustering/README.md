@@ -1,56 +1,104 @@
-# Machine Learning Engineer Nanodegree
-# Supervised Learning
-## Project: Finding Donors for CharityML
+# Project - Finding Donors for CharityML
 
-### Install
+This project is designed to show off supervised learning algorithms available in [scikit-learn](https://anaconda.org/anaconda/scikit-learn), as well as show a method of evaluating just how each model works and performs on a certain type of data. It is important in machine learning to understand exactly when and where a certain algorithm should be used, and when one should be avoided.
 
-This project requires **Python 2.7** and the following Python libraries installed:
 
-- [NumPy](http://www.numpy.org/)
-- [Pandas](http://pandas.pydata.org)
-- [matplotlib](http://matplotlib.org/)
-- [scikit-learn](http://scikit-learn.org/stable/)
+## Project Overview
 
-You will also need to have software installed to run and execute an [iPython Notebook](http://ipython.org/notebook.html)
+In this project, we will apply supervised learning techniques to help CharityML (a fictitious charity organization) identify people most likely to donate to their cause. We will first explore the data to learn how the census data is recorded. 
 
-We recommend students install [Anaconda](https://www.continuum.io/downloads), a pre-packaged Python distribution that contains all of the necessary libraries and software for this project. 
+Next, we will apply a series of transformations and preprocessing techniques to manipulate the data into a workable format. Then we will evaluate several supervised learners of our choice on the data, and consider which is best suited for the solution. 
 
-### Code
+Afterwards, we will optimize the model and present it as a solution to CharityML. 
 
-Template code is provided in the `finding_donors.ipynb` notebook file. You will also be required to use the included `visuals.py` Python file and the `census.csv` dataset file to complete your work. While some code has already been implemented to get you started, you will need to implement additional functionality when requested to successfully complete the project. Note that the code included in `visuals.py` is meant to be used out-of-the-box and not intended for students to manipulate. If you are interested in how the visualizations are created in the notebook, please feel free to explore this Python file.
+Finally, we will explore the chosen model and its predictions under the hood, to see just how well it's performing when considering the data it's given.
 
-### Run
+### Things we will do in this project
 
-In a terminal or command window, navigate to the top-level project directory `finding_donors/` (that contains this README) and run one of the following commands:
+* Apply preprocessing to the census data.
+* Establish a benchmark for a solution to identifying charity donors.
+* Use several supervised learning algorithms.
+* Investigate whether a model is adequate for identifying charity donors.
 
-```bash
-ipython notebook finding_donors.ipynb
-```  
-or
-```bash
-jupyter notebook finding_donors.ipynb
-```
+
+## Getting Started
+
+### Prerequisites
+
+You'll need to install:
+
+* [Anaconda](https://www.continuum.io/downloads)
+* [Python (Minimum 3)](https://www.continuum.io/blog/developer-blog/python-3-support-anaconda)
+* [Pandas](https://anaconda.org/anaconda/pandas)
+* [Numpy](https://anaconda.org/anaconda/numpy)
+* [scikit-learn](https://anaconda.org/anaconda/scikit-learn)
+* [Matplotlib](https://anaconda.org/anaconda/matplotlib)
+
+### Data Files
+
+The modified census dataset consists of approximately 32,000 data points, with each datapoint having 13 features. This dataset is a modified version of the dataset published in the paper [*"Scaling Up the Accuracy of Naive-Bayes Classifiers: a Decision-Tree Hybrid",* by Ron Kohavi](https://www.aaai.org/Papers/KDD/1996/KDD96-033.pdf). The original dataset hosted on [UCI](https://archive.ics.uci.edu/ml/datasets/Census+Income).
+
+#### Features
+
+* `age`: Age
+* `workclass`: Working Class (Private, Self-emp-not-inc, Self-emp-inc, Federal-gov, Local-gov, State-gov, Without-pay, Never-worked)
+* `education_level`: Level of Education (Bachelors, Some-college, 11th, HS-grad, Prof-school, Assoc-acdm, Assoc-voc, 9th, 7th-8th, 12th, Masters, 1st-4th, 10th, Doctorate, 5th-6th, Preschool)
+* `education-num`: Number of educational years completed
+* `marital-status`: Marital status (Married-civ-spouse, Divorced, Never-married, Separated, Widowed, Married-spouse-absent, Married-AF-spouse)
+* `occupation`: Work Occupation (Tech-support, Craft-repair, Other-service, Sales, Exec-managerial, Prof-specialty, Handlers-cleaners, Machine-op-inspct, Adm-clerical, Farming-fishing, Transport-moving, Priv-house-serv, Protective-serv, Armed-Forces)
+* `relationship`: Relationship Status (Wife, Own-child, Husband, Not-in-family, Other-relative, Unmarried)
+* `race`: Race (White, Asian-Pac-Islander, Amer-Indian-Eskimo, Other, Black)
+* `sex`: Sex (Female, Male)
+* `capital-gain`: Monetary Capital Gains
+* `capital-loss`: Monetary Capital Losses
+* `hours-per-week`: Average Hours Per Week Worked
+* `native-country`: Native Country (United-States, Cambodia, England, Puerto-Rico, Canada, Germany, Outlying-US(Guam-USVI-etc), India, Japan, Greece, South, China, Cuba, Iran, Honduras, Philippines, Italy, Poland, Jamaica, Vietnam, Mexico, Portugal, Ireland, France, Dominican-Republic, Laos, Ecuador, Taiwan, Haiti, Columbia, Hungary, Guatemala, Nicaragua, Scotland, Thailand, Yugoslavia, El-Salvador, Trinadad&Tobago, Peru, Hong, Holand-Netherlands)
+
+#### Target Variable
+* `income`: Income Class (<=50K, >50K)
+
+
+## Python Notebook and Scripts
+
+* `Finding_Charity_Donors.ipynb` - Main project file, an IPython Notbook that contains the analysis for the project.
+
+* `visuals.py` - A Python script containing visualization code that is run behind-the-scenes.
+
+### Opening the Jupyter Notebook
+
+The project `Finding_Charity_Donors.ipynb` can be read using a Jupyter Notebook. There's also an HTML version `Finding_Charity_Donors.html` included for easier viewability.
+
+* Open your Command Prompt (PC) or terminal (Mac or Linux).
+* On a PC click the Start button and search for "Command Prompt".
+* On a Mac type command + spacebar. Then, type "terminal" in the Spotlight Search. You can also search for "terminal" in finder.
+* Navigate to the directory where you downloaded the Jupyter notebook file.
+* On a PC you might type: cd C:\Users\username\Downloads\, replacing your username. Learn more about basic terminal commands.
+* On Mac or Linux you might type: cd ~/Downloads.
+* Run the command `jupyter notebook Finding_Charity_Donors.ipynb` in your terminal.
 
 This will open the iPython Notebook software and project file in your browser.
 
-### Data
+#### Special Note
 
-The modified census dataset consists of approximately 32,000 data points, with each datapoint having 13 features. This dataset is a modified version of the dataset published in the paper *"Scaling Up the Accuracy of Naive-Bayes Classifiers: a Decision-Tree Hybrid",* by Ron Kohavi. You may find this paper [online](https://www.aaai.org/Papers/KDD/1996/KDD96-033.pdf), with the original dataset hosted on [UCI](https://archive.ics.uci.edu/ml/datasets/Census+Income).
+If you try running a code block and get an error message like 'no module named matplotlib', then your distribution of Anaconda may be missing a package used in the project. That's okay – there's an easy way that you can install these packages. It's as simple as Googling the library for easy to use guides on installation!
 
-**Features**
-- `age`: Age
-- `workclass`: Working Class (Private, Self-emp-not-inc, Self-emp-inc, Federal-gov, Local-gov, State-gov, Without-pay, Never-worked)
-- `education_level`: Level of Education (Bachelors, Some-college, 11th, HS-grad, Prof-school, Assoc-acdm, Assoc-voc, 9th, 7th-8th, 12th, Masters, 1st-4th, 10th, Doctorate, 5th-6th, Preschool)
-- `education-num`: Number of educational years completed
-- `marital-status`: Marital status (Married-civ-spouse, Divorced, Never-married, Separated, Widowed, Married-spouse-absent, Married-AF-spouse)
-- `occupation`: Work Occupation (Tech-support, Craft-repair, Other-service, Sales, Exec-managerial, Prof-specialty, Handlers-cleaners, Machine-op-inspct, Adm-clerical, Farming-fishing, Transport-moving, Priv-house-serv, Protective-serv, Armed-Forces)
-- `relationship`: Relationship Status (Wife, Own-child, Husband, Not-in-family, Other-relative, Unmarried)
-- `race`: Race (White, Asian-Pac-Islander, Amer-Indian-Eskimo, Other, Black)
-- `sex`: Sex (Female, Male)
-- `capital-gain`: Monetary Capital Gains
-- `capital-loss`: Monetary Capital Losses
-- `hours-per-week`: Average Hours Per Week Worked
-- `native-country`: Native Country (United-States, Cambodia, England, Puerto-Rico, Canada, Germany, Outlying-US(Guam-USVI-etc), India, Japan, Greece, South, China, Cuba, Iran, Honduras, Philippines, Italy, Poland, Jamaica, Vietnam, Mexico, Portugal, Ireland, France, Dominican-Republic, Laos, Ecuador, Taiwan, Haiti, Columbia, Hungary, Guatemala, Nicaragua, Scotland, Thailand, Yugoslavia, El-Salvador, Trinadad&Tobago, Peru, Hong, Holand-Netherlands)
 
-**Target Variable**
-- `income`: Income Class (<=50K, >50K)
+## Authors
+
+* **[Paul Foley](https://github.com/paulfoley)**
+* [Udacity](https://www.udacity.com/)
+
+
+## License
+
+* <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"> Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>
+
+<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+	<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
+</a>
+
+
+## Acknowledgments
+
+* [Ron Kohavi](https://www.aaai.org/Papers/KDD/1996/KDD96-033.pdf)
+* [UCI](https://archive.ics.uci.edu/ml/datasets/Census+Income)

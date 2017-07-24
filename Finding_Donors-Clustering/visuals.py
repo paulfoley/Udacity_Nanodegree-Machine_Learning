@@ -1,29 +1,31 @@
-###########################################
-# Suppress matplotlib user warnings
-# Necessary for newer version of matplotlib
+'''
+Script to help with visuals in IPython for Finding Charity Donors 
+'''
+## Imports
 import warnings
-warnings.filterwarnings("ignore", category = UserWarning, module = "matplotlib")
-
-# Display inline matplotlib plots with IPython
 from IPython import get_ipython
-get_ipython().run_line_magic('matplotlib', 'inline')
-###########################################
-
 import matplotlib.pyplot as pl
 import matplotlib.patches as mpatches
 import numpy as np
 import pandas as pd
 from time import time
+
+## sklearn Imports
 from sklearn.metrics import f1_score, accuracy_score
 
+## Suppress Matplotlib User Warnings
+warnings.filterwarnings("ignore", category = UserWarning, module = "matplotlib")
 
+## Display Inline Matplotlib Plots with IPython
+get_ipython().run_line_magic('matplotlib', 'inline')
+
+## Functions
 def distribution(data, transformed = False):
-    # Visualization code for displaying skewed distributions of features
-    
-    # Create figure
+    ### Visualization Code for Displaying Skewed Distributions of Features
+    #### Create figure
     fig = pl.figure(figsize = (11,5));
 
-    # Skewed feature plotting
+    #### Skewed Feature Plotting
     for i, feature in enumerate(['capital-gain','capital-loss']):
         ax = fig.add_subplot(1, 2, i+1)
         ax.hist(data[feature], bins = 25, color = '#00A0A0')
@@ -34,14 +36,13 @@ def distribution(data, transformed = False):
         ax.set_yticks([0, 500, 1000, 1500, 2000])
         ax.set_yticklabels([0, 500, 1000, 1500, ">2000"])
 
-    # Plot aesthetics
+    #### Plot Aesthetics
     if transformed:
         fig.suptitle("Log-transformed Distributions of Continuous Census Data Features", \
             fontsize = 16, y = 1.03)
     else:
         fig.suptitle("Skewed Distributions of Continuous Census Data Features", \
             fontsize = 16, y = 1.03)
-
     fig.tight_layout()
     fig.show()
 
@@ -50,21 +51,21 @@ def evaluate(results, accuracy, f1):
     """
     Visualization code to display results of various learners.
     
-    inputs:
+    Inputs:
       - learners: a list of supervised learners
       - stats: a list of dictionaries of the statistic results from 'train_predict()'
       - accuracy: The score for the naive predictor
       - f1: The score for the naive predictor
     """
   
-    # Create figure
+    #### Create Figure
     fig, ax = pl.subplots(2, 3, figsize = (11,7))
 
-    # Constants
+    #### Constants
     bar_width = 0.3
     colors = ['#A00000','#00A0A0','#00A000']
     
-    # Super loop to plot four panels of data
+    #### Super Loop to Plot Four Panels of Data
     for k, learner in enumerate(results.keys()):
         for j, metric in enumerate(['train_time', 'acc_train', 'f_train', 'pred_time', 'acc_test', 'f_test']):
             for i in np.arange(3):
@@ -76,7 +77,7 @@ def evaluate(results, accuracy, f1):
                 ax[j/3, j%3].set_xlabel("Training Set Size")
                 ax[j/3, j%3].set_xlim((-0.1, 3.0))
     
-    # Add unique y-labels
+    #### Add Unique y-labels
     ax[0, 0].set_ylabel("Time (in seconds)")
     ax[0, 1].set_ylabel("Accuracy Score")
     ax[0, 2].set_ylabel("F-score")
@@ -84,7 +85,7 @@ def evaluate(results, accuracy, f1):
     ax[1, 1].set_ylabel("Accuracy Score")
     ax[1, 2].set_ylabel("F-score")
     
-    # Add titles
+    #### Add Titles
     ax[0, 0].set_title("Model Training")
     ax[0, 1].set_title("Accuracy Score on Training Subset")
     ax[0, 2].set_title("F-score on Training Subset")
@@ -92,39 +93,39 @@ def evaluate(results, accuracy, f1):
     ax[1, 1].set_title("Accuracy Score on Testing Set")
     ax[1, 2].set_title("F-score on Testing Set")
     
-    # Add horizontal lines for naive predictors
+    #### Add Horizontal Lines for Naive Predictors
     ax[0, 1].axhline(y = accuracy, xmin = -0.1, xmax = 3.0, linewidth = 1, color = 'k', linestyle = 'dashed')
     ax[1, 1].axhline(y = accuracy, xmin = -0.1, xmax = 3.0, linewidth = 1, color = 'k', linestyle = 'dashed')
     ax[0, 2].axhline(y = f1, xmin = -0.1, xmax = 3.0, linewidth = 1, color = 'k', linestyle = 'dashed')
     ax[1, 2].axhline(y = f1, xmin = -0.1, xmax = 3.0, linewidth = 1, color = 'k', linestyle = 'dashed')
     
-    # Set y-limits for score panels
+    #### Set y-limits for Score Panels
     ax[0, 1].set_ylim((0, 1))
     ax[0, 2].set_ylim((0, 1))
     ax[1, 1].set_ylim((0, 1))
     ax[1, 2].set_ylim((0, 1))
 
-    # Create patches for the legend
+    #### Create Patches for the Legend
     patches = []
     for i, learner in enumerate(results.keys()):
         patches.append(mpatches.Patch(color = colors[i], label = learner))
     pl.legend(handles = patches, bbox_to_anchor = (-.80, 2.53), \
                loc = 'upper center', borderaxespad = 0., ncol = 3, fontsize = 'x-large')
     
-    # Aesthetics
+    #### Aesthetics
     pl.suptitle("Performance Metrics for Three Supervised Learning Models", fontsize = 16, y = 1.10)
     pl.tight_layout()
     pl.show()
     
 
 def feature_plot(importances, X_train, y_train):
-    
-    # Display the five most important features
+    ### Function for Plotting Features
+    #### Display the Five Most Important Features
     indices = np.argsort(importances)[::-1]
     columns = X_train.columns.values[indices[:5]]
     values = importances[indices][:5]
 
-    # Creat the plot
+    #### Creat the Plot
     fig = pl.figure(figsize = (9,5))
     pl.title("Normalized Weights for First Five Most Predictive Features", fontsize = 16)
     pl.bar(np.arange(5), values, width = 0.6, align="center", color = '#00A000', \
