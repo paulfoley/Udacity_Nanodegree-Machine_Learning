@@ -25,6 +25,7 @@ You'll need to install:
 
 * [Anaconda](https://www.continuum.io/downloads)
 * [Python (Minimum 3)](https://www.continuum.io/blog/developer-blog/python-3-support-anaconda)
+* [Jupyter Notebook](http://ipython.org/notebook.html)
 * [Pandas](https://anaconda.org/anaconda/pandas)
 * [Numpy](https://anaconda.org/anaconda/numpy)
 * [scikit-learn](https://anaconda.org/anaconda/scikit-learn)
@@ -68,15 +69,15 @@ The project `Finding_Charity_Donors.ipynb` can be read using a Jupyter Notebook.
 * On a PC click the Start button and search for "Command Prompt".
 * On a Mac type command + spacebar. Then, type "terminal" in the Spotlight Search. You can also search for "terminal" in finder.
 * Navigate to the directory where you downloaded the Jupyter notebook file.
-* On a PC you might type: cd C:\Users\username\Downloads\, replacing your username. Learn more about basic terminal commands.
+* On a PC you might type: cd C:\Users\username\Downloads\, replacing your username.
 * On Mac or Linux you might type: cd ~/Downloads.
 * Run the command `jupyter notebook Finding_Charity_Donors.ipynb` in your terminal.
 
-This will open the iPython Notebook software and project file in your browser.
+This will open the iPython Notebook in your browser.
 
 #### Special Note
 
-If you try running a code block and get an error message like 'no module named matplotlib', then your distribution of Anaconda may be missing a package used in the project. That's okay – there's an easy way that you can install these packages. It's as simple as Googling the library for easy to use guides on installation!
+If you try running a code block and get an error message like `no module named matplotlib`, then your distribution of [Anaconda](https://www.continuum.io/downloads) may be missing a package used in the project. That's okay – there's an easy way that you can install these packages. It's as simple as [Googling](https://www.google.com/) the library for easy to use guides on installation!
 
 
 ## Authors
