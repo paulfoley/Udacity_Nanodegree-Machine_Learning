@@ -4,19 +4,18 @@ The Boston housing market is highly competitive! To be the best real estate agen
 
 ## Project Overview
 
-Here we can leverage a few basic machine learning concepts to assist you and a client with finding the best selling price for their home. Luckily, you\'ve come across the Boston Housing dataset which contains aggregated data on various features for houses in Greater Boston communities, including the median value of homes for each of those areas. Your task is to build an optimal model based on a statistical analysis with the tools available. This model will then be used to estimate the best selling price for your clients\' homes.
+In this project, we are going to help real estate agents find the best selling price for their clients homes in Boston. To do this we'll use the [Boston Housing Dataset provided by UCI](https://archive.ics.uci.edu/ml/datasets/Housing), which contains aggregated data on various features for houses in the greater Boston communities and includes the median value of homes for each of those areas. 
 
-In this project, you will apply basic machine learning concepts on data collected for housing prices in the Boston, Massachusetts area to predict the selling price of a new home. You will first explore the data to obtain important features and descriptive statistics about the dataset. Next, you will properly split the data into testing and training subsets, and determine a suitable performance metric for this problem. You will then analyze performance graphs for a learning algorithm with varying parameters and training set sizes. This will enable you to pick the optimal model that best generalizes for unseen data. Finally, you will test this optimal model on a new sample and compare the predicted selling price to your statistics.
+Our goal is to build an optimal model, based on machine learning, and then use the model to estimate the best selling price for the clients homes.
 
-## Project Highlights
-This project is designed to get you acquainted to working with datasets in Python and applying basic machine learning techniques using NumPy and Scikit-Learn. Before being expected to use many of the available algorithms in the sklearn library, it will be helpful to first practice analyzing and interpreting the performance of your model.
+### Project Steps
 
-Things you will learn by completing this project:
+* Explore the data to obtain important features and descriptive statistics about the dataset. 
+* Properly split the data into testing and training subsets, and determine a suitable performance metric for this problem. 
+* Analyze performance graphs for a learning algorithm with varying parameters and training set sizes. Specifically looking for variance and bias.
+* Pick the optimal model that best generalizes for unseen data. 
+* Test the optimal model on a new sample and compare the predicted selling price to our statistics.
 
-- How to use NumPy to investigate the latent features of a dataset.
-- How to analyze various learning performance plots for variance and bias.
-- How to determine the best-guess model for predictions from unseen data.
-- How to evaluate a model's performance on unseen data using previous data.
 
 ## Getting Started
 
@@ -26,86 +25,66 @@ You'll need to install:
 
 * [Anaconda](https://www.continuum.io/downloads)
 * [Python (Minimum 3)](https://www.continuum.io/blog/developer-blog/python-3-support-anaconda)
+* [Jupyter Notebook](http://ipython.org/notebook.html)
 * [Pandas](https://anaconda.org/anaconda/pandas)
 * [Numpy](https://anaconda.org/anaconda/numpy)
 * [scikit-learn](https://anaconda.org/anaconda/scikit-learn)
 * [Matplotlib](https://anaconda.org/anaconda/matplotlib)
 
-You will also need to have software installed to run and execute a [Jupyter Notebook](http://ipython.org/notebook.html).
+### Data Files
 
-If you do not have Python installed yet, it is highly recommended that you install the [Anaconda](http://continuum.io/downloads) distribution of Python, which already has the above packages and more included. Make sure that you select the Python 2.7 installer and not the Python 3.x installer.
+* `housing.csv` - The modified Boston housing dataset consists of 489 data points, with each datapoint having 3 features. This dataset is a modified version of the Boston Housing dataset found on the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Housing).
 
-## Starting the Project
+#### Features
 
-For this assignment, you can find the `boston_housing` folder containing the necessary project files on the [Machine Learning projects GitHub](https://github.com/udacity/machine-learning), under the `projects` folder. You may download all of the files for projects we'll use in this Nanodegree program directly from this repo. Please make sure that you use the most recent version of project files when completing a project!
+* `RM` - Average number of rooms per dwelling
+* `LSTAT` - Percentage of population considered lower status
+* `PTRATIO` - Pupil-teacher ratio by town
 
-This project contains three files:
+#### Target Variable
 
-- `boston_housing.ipynb`: This is the main file where you will be performing your work on the project.
-- `housing.csv`: The project dataset. You'll load this data in the notebook.
-- `visuals.py`: This Python script provides supplementary visualizations for the project. Do not modify.
+* `MEDV` - Median value of owner-occupied homes
 
-In the Terminal or Command Prompt, navigate to the folder containing the project files, and then use the command `jupyter notebook boston_housing.ipynb` to open up a browser window or tab to work with your notebook. Alternatively, you can use the command `jupyter notebook` or `ipython notebook` and navigate to the notebook file in the browser window that opens. Follow the instructions in the notebook and answer each question presented to successfully complete the project. A **README** file has also been provided with the project files which may contain additional necessary information or instruction for the project. 
 
-## Submitting the Project
+## Python Notebook and Scripts
 
-### Evaluation
-Your project will be reviewed by a Udacity reviewer against the **<a href="https://review.udacity.com/#!/rubrics/103/view" target="_blank">Predicting Boston Housing Prices project rubric</a>**. Be sure to review this rubric thoroughly and self-evaluate your project before submission. All criteria found in the rubric must be *meeting specifications* for you to pass.
+* `boston_housing_prices.ipynb` - Main project file, an IPython Notbook that contains the analysis for the project.
+* `visuals.py` - A Python script containing visualization code that is run behind the scenes.
 
-### Submission Files
-When you are ready to submit your project, collect the following files and compress them into a single archive for upload. Alternatively, you may supply the following files on your GitHub Repo in a folder named `boston_housing` for ease of access:
- - The `boston_housing.ipynb` notebook file with all questions answered and all code cells executed and displaying output.
- - An **HTML** export of the project notebook with the name **report.html**. This file *must* be present for your project to be evaluated.
+### Opening the Jupyter Notebook
 
-Once you have collected these files and reviewed the project rubric, proceed to the project submission page.
+The project `Boston_Housing_Prices.ipynb` can be read using a Jupyter Notebook. There's also an HTML version `Boston_Housing_Prices.html` included for easier viewability.
 
-### I'm Ready!
-When you're ready to submit your project, click on the **Submit Project** button at the bottom of the page.
+* Open your Command Prompt (PC) or terminal (Mac or Linux).
+* On a PC click the Start button and search for "Command Prompt".
+* On a Mac type command + spacebar. Then, type "terminal" in the Spotlight Search. You can also search for "terminal" in finder.
+* Navigate to the directory where you downloaded the Jupyter notebook file.
+* On a PC you might type: cd C:\Users\username\Downloads\, replacing your username. 
+* On Mac or Linux you might type: cd ~/Downloads.
+* Run the command `jupyter notebook Finding_Charity_Donors.ipynb` in your terminal.
 
-If you are having any problems submitting your project or wish to check on the status of your submission, please email us at **machine-support@udacity.com** or visit us in the <a href="http://discussions.udacity.com" target="_blank">discussion forums</a>.
+This will open the iPython Notebook in your browser.
 
-### What's Next?
-You will get an email as soon as your reviewer has feedback for you. In the meantime, review your next project and feel free to get started on it or the courses supporting it!
+#### Special Note
 
-### Install
+If you try running a code block and get an error message like 'no module named matplotlib', then your distribution of Anaconda may be missing a package used in the project. That's okay – there's an easy way that you can install these packages. It's as simple as Googling the library for easy to use guides on installation!
 
-This project requires **Python 2.7** and the following Python libraries installed:
 
-- [NumPy](http://www.numpy.org/)
-- [Pandas](http://pandas.pydata.org/)
-- [matplotlib](http://matplotlib.org/)
-- [scikit-learn](http://scikit-learn.org/stable/)
+## Authors
 
-You will also need to have software installed to run and execute a [Jupyter Notebook](http://ipython.org/notebook.html)
+* **[Paul Foley](https://github.com/paulfoley)**
+* [Udacity](https://www.udacity.com/)
 
-If you do not have Python installed yet, it is highly recommended that you install the [Anaconda](http://continuum.io/downloads) distribution of Python, which already has the above packages and more included. Make sure that you select the Python 2.7 installer and not the Python 3.x installer.
 
-### Code
+## License
 
-Template code is provided in the `boston_housing.ipynb` notebook file. You will also be required to use the included `visuals.py` Python file and the `housing.csv` dataset file to complete your work. While some code has already been implemented to get you started, you will need to implement additional functionality when requested to successfully complete the project. Note that the code included in `visuals.py` is meant to be used out-of-the-box and not intended for students to manipulate. If you are interested in how the visualizations are created in the notebook, please feel free to explore this Python file.
+* <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"> Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>
 
-### Run
+<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+	<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" />
+</a>
 
-In a terminal or command window, navigate to the top-level project directory `boston_housing/` (that contains this README) and run one of the following commands:
 
-```bash
-ipython notebook boston_housing.ipynb
-```  
-or
-```bash
-jupyter notebook boston_housing.ipynb
-```
+## Acknowledgments
 
-This will open the Jupyter Notebook software and project file in your browser.
-
-### Data
-
-The modified Boston housing dataset consists of 489 data points, with each datapoint having 3 features. This dataset is a modified version of the Boston Housing dataset found on the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Housing).
-
-**Features**
-1.  `RM`: average number of rooms per dwelling
-2. `LSTAT`: percentage of population considered lower status
-3. `PTRATIO`: pupil-teacher ratio by town
-
-**Target Variable**
-4. `MEDV`: median value of owner-occupied homes
+* [UCI](https://archive.ics.uci.edu/ml/datasets/Housing)
