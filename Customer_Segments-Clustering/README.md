@@ -2,23 +2,24 @@
 
 Many companies today collect vast amounts of data on customers and clientele, and have a strong desire to understand the meaningful relationships hidden in their customer base. Knowing this information can assist the company in engineering future products and services that best satisfy the demands or needs of their customers.
 
-A wholesale distributor recently tested a change to their delivery method for some customers, by moving from a morning delivery service five days a week to a cheaper evening delivery service three days a week. Initial testing did not discover any significant unsatisfactory results, so they implemented the cheaper option for all customers. Almost immediately, the distributor began getting complaints about the delivery service change and customers were canceling deliveries, losing the distributor more money than what was being saved. You've been hired by the wholesale distributor to find what types of customers they have to help them make better, more informed business decisions in the future. Your task is to use unsupervised learning techniques to see if any similarities exist between customers, and how to best segment customers into distinct categories.
+For example, in this project a wholesale distributor, recently tested a change to their delivery method for some customers. By moving from a morning delivery service five days a week to a cheaper evening delivery service three days a week. Initial testing did not discover any significant unsatisfactory results, so they implemented the cheaper option for all customers. Almost immediately, the distributor began getting complaints about the delivery service change and customers were canceling deliveries. This caused the distributor to lose more money than what was being saved. Let's help the wholesale distributor find what types of customers they have, to help them make better and more informed business decisions in the future.
 
 ## Project Overview
 
-In this project we will apply unsupervised learning techniques, using the [scikit-learn](https://anaconda.org/anaconda/scikit-learn) library, on product spending data collected for customers of a wholesale distributor in Lisbon, Portugal to identify customer segments hidden in the data. 
+In this project we will apply unsupervised learning techniques, using the [scikit-learn](https://anaconda.org/anaconda/scikit-learn) library, on product spending data. We'll look for similarities that exist between customers, and how to best segment customers into distinct categories. Our end goal is to identify customer segments hidden in the data. 
 
 ### Project Steps
 
 * Explore the data by selecting a small subset to sample.
 * Determine if any product categories highly correlate with one another. 
-* Preprocess the data by scaling each product category
+* Preprocess the data by scaling each product category.
 * Identify (and remove) unwanted outliers. 
 * Apply PCA transformations to the data.
 * Implement clustering algorithms to segment the transformed customer data.
 * Interpret data points that have been scaled, transformed, or reduced from PCA.
 * Compare the segmentation found with an additional labeling.
 * Consider ways this information could assist the wholesale distributor with future service changes.
+
 
 ## Getting Started
 
@@ -49,7 +50,7 @@ You'll need to install:
 * `Channel` - {Hotel/Restaurant/Cafe - 1, Retail - 2} (Nominal)
 * `Region` - {Lisbon - 1, Oporto - 2, or Other - 3} (Nominal) 
 
-Note (m.u.) is shorthand for *monetary units*.
+Note - *(m.u.)* is shorthand for *monetary units*.
 
 
 ## Python Notebook and Scripts
