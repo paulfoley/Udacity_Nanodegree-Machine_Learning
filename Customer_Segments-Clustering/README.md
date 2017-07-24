@@ -6,7 +6,7 @@ For example, in this project a wholesale distributor, recently tested a change t
 
 ## Project Overview
 
-In this project we will apply unsupervised learning techniques, using the [scikit-learn](https://anaconda.org/anaconda/scikit-learn) library, on product spending data. We'll look for similarities that exist between customers, and how to best segment customers into distinct categories. Our end goal is to identify customer segments hidden in the data. 
+In this project we will apply unsupervised learning techniques, using the [scikit-learn](https://anaconda.org/anaconda/scikit-learn) library, on [product spending data of the wholesale distributor](https://archive.ics.uci.edu/ml/datasets/Wholesale+customers). We'll look for similarities that exist between customers, and how to best segment customers into distinct categories. Our end goal is to identify customer segments hidden in the data. 
 
 ### Project Steps
 
