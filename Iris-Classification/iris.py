@@ -1,30 +1,33 @@
+'''
+Use the sklearn dataset iris 
+To show how the Decision Tree Classifier works
+'''
 ## Imports
-import IPython.display
-import pydotplus 
+from subprocess import check_call
 
 ## sklearn imports
-from sklearn import tree
-from sklearn.datasets import load_iris 
+from sklearn.tree import DecisionTreeClassifier, export_graphviz
+from sklearn.datasets import load_iris
 
 ## Get Data
 iris = load_iris()
 
 ## Create Classifier
-classifier = tree.DecisionTreeClassifier()
+classifier = DecisionTreeClassifier()
 
 ## Fit Classifier
 classifier = classifier.fit(iris.data, iris.target)
 
 ## Predict Results
-predictions = classifier.predict(iris.data[:1, :])
-
-## Predict Probability Results
-probability = classifier.predict_proba(iris.data[:1, :])
+prediction = classifier.predict(iris.data[:1, :])
 
 ## Output Results
-print(predictions, probability)
+print('Prediction:')
+print(prediction)
 
-## Create PDF of Decision Tree
-dot_data = tree.export_graphviz(classifier, out_file=None) 
-graph = pydotplus.graph_from_dot_data(dot_data) 
-graph.write_pdf("iris.pdf")  
+
+## Create PNG of Decision Tree
+dot_data = export_graphviz(classifier, out_file = 'iris.dot',feature_names = iris.feature_names, 
+							class_names=iris.target_names, filled=True, rounded=True, special_characters=True)  
+
+check_call(['dot','-Tpng','iris.dot','-o','iris.png'])
