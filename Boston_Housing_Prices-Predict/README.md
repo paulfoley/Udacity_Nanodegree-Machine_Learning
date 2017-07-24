@@ -37,9 +37,9 @@ You'll need to install:
 
 #### Features
 
-* `RM` - Average number of rooms per dwelling
+* `RM` - Average number of rooms per home
 * `LSTAT` - Percentage of population considered lower status
-* `PTRATIO` - Pupil-teacher ratio by town
+* `PTRATIO` - Pupil to teacher ratio by community
 
 #### Target Variable
 
@@ -48,7 +48,7 @@ You'll need to install:
 
 ## Python Notebook and Scripts
 
-* `boston_housing_prices.ipynb` - Main project file, an IPython Notbook that contains the analysis for the project.
+* `Boston_Housing_Prices.ipynb` - Main project file, an IPython Notbook that contains the analysis for the project.
 * `visuals.py` - A Python script containing visualization code that is run behind the scenes.
 
 ### Opening the Jupyter Notebook
@@ -61,13 +61,13 @@ The project `Boston_Housing_Prices.ipynb` can be read using a Jupyter Notebook. 
 * Navigate to the directory where you downloaded the Jupyter notebook file.
 * On a PC you might type: cd C:\Users\username\Downloads\, replacing your username. 
 * On Mac or Linux you might type: cd ~/Downloads.
-* Run the command `jupyter notebook Finding_Charity_Donors.ipynb` in your terminal.
+* Run the command `jupyter notebook Boston_Housing_Prices.ipynb` in your terminal.
 
 This will open the iPython Notebook in your browser.
 
 #### Special Note
 
-If you try running a code block and get an error message like 'no module named matplotlib', then your distribution of Anaconda may be missing a package used in the project. That's okay – there's an easy way that you can install these packages. It's as simple as Googling the library for easy to use guides on installation!
+If you try running a code block and get an error message like `no module named matplotlib`, then your distribution of [Anaconda](https://www.continuum.io/downloads) may be missing a package used in the project. That's okay – there's an easy way that you can install these packages. It's as simple as [Googling](https://www.google.com/) the library for easy to use guides on installation!
 
 
 ## Authors
@@ -87,4 +87,4 @@ If you try running a code block and get an error message like 'no module named m
 
 ## Acknowledgments
 
-* [UCI](https://archive.ics.uci.edu/ml/datasets/Housing)
+* [UCI Datasets](https://archive.ics.uci.edu/ml/datasets/Housing)
