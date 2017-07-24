@@ -37,7 +37,7 @@ estimator_gbc = GradientBoostingClassifier()
 estimator_svc = SVC(kernel='rbf', gamma=1000)
 
 ## Learning Curve Function
-def draw_learning_curves(X, y, estimator, num_trainings):
+def draw_learning_curves(X, y, estimator, num_trainings, filename):
 	### Draws the Learning Curve given an estimator
 
 	#### Get the Training Sizes, Train Scores, and Test Scores
@@ -49,6 +49,7 @@ def draw_learning_curves(X, y, estimator, num_trainings):
     test_scores_std = np.std(test_scores, axis=1)
 
     #### Plot the Learning Curve
+    plt.figure()
     plt.grid()
     plt.title("Learning Curves")
     plt.xlabel("Training examples")
@@ -59,9 +60,10 @@ def draw_learning_curves(X, y, estimator, num_trainings):
              label="Cross-validation score")
     plt.legend(loc="best")
 
-    plt.show()
+    plt.savefig(filename, bbox_inches='tight')
 
 ## Output
-draw_learning_curves(X, y, estimator_log, 5)
-draw_learning_curves(X, y, estimator_gbc, 5)
-draw_learning_curves(X, y, estimator_svc, 5)
+draw_learning_curves(X = X, y = y, estimator = estimator_log, num_trainings = 10, filename = 'learning_curve-logistic_regression.png')
+draw_learning_curves(X = X, y = y, estimator = estimator_gbc, num_trainings = 10, filename = 'learning_curve-decision_tree.png')
+draw_learning_curves(X = X, y = y, estimator = estimator_svc, num_trainings = 10, filename = 'learning_curve-support_vector_machine.png')
+
