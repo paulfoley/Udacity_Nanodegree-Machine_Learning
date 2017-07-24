@@ -1,11 +1,11 @@
 # Project - Finding Donors for CharityML
 
-This project is designed to show off supervised learning algorithms available in [scikit-learn](https://anaconda.org/anaconda/scikit-learn), as well as show a method for evaluating how each model works. It is important in machine learning to understand exactly when and where a certain algorithm should be used, and when one should be avoided.
+As any charity organization knows, finding donors can be extremely difficult. However, by learning from the features of previous donors maybe we can help a charity recognize the people that are most likely to donate.
 
 
 ## Project Overview
 
-In this project, we will apply supervised learning techniques to help CharityML (a fictitious charity organization) identify people most likely to donate to their cause. 
+In this project, we will apply supervised learning techniques, using the [scikit-learn](https://anaconda.org/anaconda/scikit-learn) library, to help CharityML (a fictitious charity organization) identify people most likely to donate to their cause. 
 
 ### Project Steps
 
@@ -58,12 +58,12 @@ You'll need to install:
 
 ## Python Notebook and Scripts
 
-* `Finding_Charity_Donors.ipynb` - Main project file, an IPython Notbook that contains the analysis for the project.
+* `Finding_Charity_Donors.ipynb` - Main project file, an IPython Notebook that contains the analysis for the project.
 * `visuals.py` - A Python script containing visualization code that is run behind the scenes.
 
 ### Opening the Jupyter Notebook
 
-The project `Finding_Charity_Donors.ipynb` can be read using a Jupyter Notebook. There's also an HTML version `Finding_Charity_Donors.html` included for easier viewability.
+The project `Finding_Charity_Donors.ipynb` can be read using a [Jupyter Notebook](http://ipython.org/notebook.html). There's also an HTML version `Finding_Charity_Donors.html` included for easier viewability.
 
 * Open your Command Prompt (PC) or terminal (Mac or Linux).
 * On a PC click the Start button and search for "Command Prompt".
