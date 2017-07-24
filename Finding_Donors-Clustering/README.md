@@ -1,24 +1,20 @@
 # Project - Finding Donors for CharityML
 
-This project is designed to show off supervised learning algorithms available in [scikit-learn](https://anaconda.org/anaconda/scikit-learn), as well as show a method of evaluating just how each model works and performs on a certain type of data. It is important in machine learning to understand exactly when and where a certain algorithm should be used, and when one should be avoided.
+This project is designed to show off supervised learning algorithms available in [scikit-learn](https://anaconda.org/anaconda/scikit-learn), as well as show a method for evaluating how each model works. It is important in machine learning to understand exactly when and where a certain algorithm should be used, and when one should be avoided.
 
 
 ## Project Overview
 
-In this project, we will apply supervised learning techniques to help CharityML (a fictitious charity organization) identify people most likely to donate to their cause. We will first explore the data to learn how the census data is recorded. 
+In this project, we will apply supervised learning techniques to help CharityML (a fictitious charity organization) identify people most likely to donate to their cause. 
 
-Next, we will apply a series of transformations and preprocessing techniques to manipulate the data into a workable format. Then we will evaluate several supervised learners of our choice on the data, and consider which is best suited for the solution. 
+### Project Steps
 
-Afterwards, we will optimize the model and present it as a solution to CharityML. 
-
-Finally, we will explore the chosen model and its predictions under the hood, to see just how well it's performing when considering the data it's given.
-
-### Things we will do in this project
-
-* Apply preprocessing to the census data.
+* Explore the data to learn how the census data is recorded. 
+* Apply a series of transformations and preprocessing techniques to manipulate the data into a workable format. 
 * Establish a benchmark for a solution to identifying charity donors.
-* Use several supervised learning algorithms.
-* Investigate whether a model is adequate for identifying charity donors.
+* Evaluate several supervised learners on the data, and consider which is best suited for the solution. 
+* Optimize the model and present it as a solution to CharityML. 
+* Explore the chosen model and its predictions, to see how well it's performing.
 
 
 ## Getting Started
@@ -55,6 +51,7 @@ The modified census dataset consists of approximately 32,000 data points, with e
 * `native-country`: Native Country (United-States, Cambodia, England, Puerto-Rico, Canada, Germany, Outlying-US(Guam-USVI-etc), India, Japan, Greece, South, China, Cuba, Iran, Honduras, Philippines, Italy, Poland, Jamaica, Vietnam, Mexico, Portugal, Ireland, France, Dominican-Republic, Laos, Ecuador, Taiwan, Haiti, Columbia, Hungary, Guatemala, Nicaragua, Scotland, Thailand, Yugoslavia, El-Salvador, Trinadad&Tobago, Peru, Hong, Holand-Netherlands)
 
 #### Target Variable
+
 * `income`: Income Class (<=50K, >50K)
 
 
@@ -62,7 +59,7 @@ The modified census dataset consists of approximately 32,000 data points, with e
 
 * `Finding_Charity_Donors.ipynb` - Main project file, an IPython Notbook that contains the analysis for the project.
 
-* `visuals.py` - A Python script containing visualization code that is run behind-the-scenes.
+* `visuals.py` - A Python script containing visualization code that is run behind the scenes.
 
 ### Opening the Jupyter Notebook
 
