@@ -1,3 +1,7 @@
+'''
+Use various sklearn models to show how learning curves vary
+'''
+
 ## Imports
 import pandas as pd
 import numpy as np

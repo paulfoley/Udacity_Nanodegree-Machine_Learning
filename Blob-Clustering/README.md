@@ -1,6 +1,6 @@
 # Project - Blob Clustering
 
-[Scikit-learn](http://scikit-learn.org/stable/) provides a built in `make_blobs` data set. We'll use this data set to explore the [K-Means Clustering](http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html) algorthim.
+[Scikit-learn](http://scikit-learn.org/stable/) provides a built in `make_blobs` dataset. We'll use this dataset to explore the [K-Means Clustering](http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html) algorthim.
 
 
 ## Project Overview
