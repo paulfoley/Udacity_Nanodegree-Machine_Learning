@@ -1,22 +1,20 @@
-# Project - Learning Curves
+# Project - Outlier Management
 
-Outlier Management is a critical skill in machine learning! To experiment with outliers, [Udacity](https://www.udacity.com/) has provided sample data, `practice_outliers_ages.pkl` and `practice_outliers_net_worths.pkl` to play with.
+Outlier management is a critical skill in machine learning! To experiment with outliers, [Udacity](https://www.udacity.com/) has provided sample data, `practice_outliers_ages.pkl` and `practice_outliers_net_worths.pkl` to play with.
 
 
 ## Project Overview
 
-In this proejct we'll use the provided `practice_outliers_ages.pkl` and `practice_outliers_net_worths.pkl` datasets to see how outliers effect a [scikit-learn](https://anaconda.org/anaconda/scikit-learn) [Linear Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) model.
-
-The goal is to see how the [Linear Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) model better fits the data when the outliers are removed.
+In this proejct we'll use the provided `practice_outliers_ages.pkl` and `practice_outliers_net_worths.pkl` datasets to see how outliers effect a [Linear Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) model.
 
 ### Project Steps
 
-* Load the `practice_outliers_ages.pkl` and `practice_outliers_net_worths.pkl` datasets provided by [Udacity](https://www.udacity.com/).
+* Load in the `practice_outliers_ages.pkl` and `practice_outliers_net_worths.pkl` datasets provided by [Udacity](https://www.udacity.com/) into a [Numpy](https://anaconda.org/anaconda/numpy) array.
 * Create and fit the [Linear Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) to the full dataset.
 * Identify and remove outliers from the data.
 * Re-fit the [Linear Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) to the new dataset.
-* Plot the two [Linear Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) models, one for the full dataset and for the removed outler data set.
-* Observe how the [Linear Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) model better fits the data.
+* Plot the two [Linear Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) models, one for the full dataset and for the removed outler data set with the removed outliers.
+* Observe how the [Linear Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) model fits the data.
 
 
 ## Getting Started
@@ -38,7 +36,7 @@ You'll need to install:
 
 ## Script
 
-* `outlier_removal.py` - Main project script, creates and fits a [Linear Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) model on the full dataset and then again on the dataset with the outliers removed. Outputs pngs of the regression model fitting the data.
+* `outlier_removal.py` - Main project script, creates and fits a [Linear Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) model on the full dataset. Then removes the outlier data, and fits the [Linear Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) model again on the cleaned dataset. The script outputs `pngs` of the regression model, showing the fit of the model on the data.
 
 ### Output
 

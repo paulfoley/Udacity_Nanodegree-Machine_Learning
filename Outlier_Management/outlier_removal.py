@@ -35,8 +35,8 @@ ages = pickle.load(open("practice_outliers_ages.pkl", "rb"))
 net_worths = pickle.load(open("practice_outliers_net_worths.pkl", "rb"))
 
 ## Ages and net_worths need to be reshaped into 2D numpy arrays
-ages = numpy.reshape( numpy.array(ages), (len(ages), 1))
-net_worths = numpy.reshape( numpy.array(net_worths), (len(net_worths), 1))
+ages = numpy.reshape(numpy.array(ages), (len(ages), 1))
+net_worths = numpy.reshape(numpy.array(net_worths), (len(net_worths), 1))
 
 ## Create Training Features and Labels, as well as Test Features and Labels 
 ages_train, ages_test, net_worths_train, net_worths_test = train_test_split(ages, net_worths, test_size=0.1, random_state=42)
