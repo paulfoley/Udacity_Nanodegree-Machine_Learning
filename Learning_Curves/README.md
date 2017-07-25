@@ -5,9 +5,9 @@ Understaning [Learning Curves](http://scikit-learn.org/stable/auto_examples/mode
 
 ## Project Overview
 
-In this proejct we'll use the provided `data.csv` dataset to plot the [Learning Curves](http://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html) of 3 different [scikit-learn](https://anaconda.org/anaconda/scikit-learn) estimators ([Logistic Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html), [Gradient Boosting Classifier](http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html), and [Support Vector Classifier](http://scikit-learn.org/stable/modules/svm.html)). 
+In this proejct we'll use the provided `data.csv` dataset to plot the [Learning Curves](http://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html) of three different [scikit-learn](https://anaconda.org/anaconda/scikit-learn) estimators ([Logistic Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html), [Gradient Boosting Classifier](http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html), and [Support Vector Classifier](http://scikit-learn.org/stable/modules/svm.html)). 
 
-The goal is to see which estimator best predicts the data not only for the training data but also for the testing data.
+The goal is to see which estimator best predicts the data not only for the training data, but also for the testing data.
 
 ### Project Steps
 
@@ -36,7 +36,7 @@ You'll need to install:
 
 ## Script
 
-* `learning_curves.py` - Main project script, creates [Learning Curve](http://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html) plots of the three different [scikit-learn](https://anaconda.org/anaconda/scikit-learn) estimators ([Logistic Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html), [Gradient Boosting Classifier](http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html), and [Support Vector Classifier](http://scikit-learn.org/stable/modules/svm.html))
+* `learning_curves.py` - Main project script, creates [Learning Curves](http://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html) of the three different [scikit-learn](https://anaconda.org/anaconda/scikit-learn) estimators ([Logistic Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html), [Gradient Boosting Classifier](http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html), and [Support Vector Classifier](http://scikit-learn.org/stable/modules/svm.html))
 
 ### Output
 
@@ -46,7 +46,7 @@ You'll need to install:
 
 ##### Conclusion
 
-The [Logistic Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html) model underfits the data!
+The [Logistic Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html) model underfits the data! As neither the training score or the cross-validation score are close to 1.
 
 #### Gradient Boosting Classifier
 
@@ -54,7 +54,7 @@ The [Logistic Regression](http://scikit-learn.org/stable/modules/generated/sklea
 
 ##### Conclusion
 
-The [Gradient Boosting Classifier](http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html) model fits just right!
+The [Gradient Boosting Classifier](http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html) model fits the data just right! The training score is 1 and the cross-validation score gets very close to 1.
 
 #### Support Vector Classifier
 
@@ -62,7 +62,8 @@ The [Gradient Boosting Classifier](http://scikit-learn.org/stable/modules/genera
 
 ##### Conclusion
 
-The [Support Vector Classifier](http://scikit-learn.org/stable/modules/svm.html) model overfits the data!
+The [Support Vector Classifier](http://scikit-learn.org/stable/modules/svm.html) model overfits the data! While the training score is 1, the cross-validation score is below .6. Which makes us think that this model just memorized the training data and doesn't generalize well to the population data.
+
 
 ## Authors
 
