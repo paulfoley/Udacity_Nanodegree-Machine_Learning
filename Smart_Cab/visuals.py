@@ -1,27 +1,26 @@
-###########################################
-# Suppress matplotlib user warnings
-# Necessary for newer version of matplotlib
+'''
+Script to help display visuals in the IPython notebook
+'''
+## Imports
 import warnings
-warnings.filterwarnings("ignore", category = UserWarning, module = "matplotlib")
-###########################################
-# Display inline matplotlib plots with IPython
 from IPython import get_ipython
-get_ipython().run_line_magic('matplotlib', 'inline')
-###########################################
-
-# Imports
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import os
 import ast
 
-# Functions
+## Suppress matplotlib user warnings
+warnings.filterwarnings("ignore", category = UserWarning, module = "matplotlib")
+
+## Display inline matplotlib plots with IPython
+get_ipython().run_line_magic('matplotlib', 'inline')
+
+## Functions
 def calculate_safety(data):
 	"""
 	Calculates the safety rating of the smartcab during testing.
 	"""
-
 	good_ratio = data['good_actions'].sum() * 1.0 / \
 	(data['initial_deadline'] - data['final_deadline']).sum()
 
@@ -41,10 +40,10 @@ def calculate_safety(data):
 			else:
 				return ("A", "green")
 
-
 def calculate_reliability(data):
-	""" Calculates the reliability rating of the smartcab during testing. """
-
+	"""
+	Calculates the reliability rating of the smartcab during testing.
+	"""
 	success_ratio = data['success'].sum() * 1.0 / len(data)
 
 	if success_ratio == 1: # Always meets deadline
@@ -61,10 +60,10 @@ def calculate_reliability(data):
 		else:
 			return ("F", "red")
 
-
 def plot_trials(csv):
-	""" Plots the data from logged metrics during a simulation."""
-
+	"""
+	Plots the data from logged metrics during a simulation.
+	"""
 	data = pd.read_csv(os.path.join("smartcab/logs/", csv))
 
 	if len(data) < 10:
@@ -72,7 +71,7 @@ def plot_trials(csv):
 		print("At least 20 trials are required.")
 		return
 	
-	# Create additional features
+	#### Create Additional Features
 	data['average_reward'] = (data['net_reward'] / (data['initial_deadline'] - data['final_deadline'])).rolling(window=10, center=False).mean()
 	data['reliability_rate'] = (data['success']*100).rolling(window=10, center=False).mean()  # compute avg. net reward with window=10
 	data['good_actions'] = data['actions'].apply(lambda x: ast.literal_eval(x)[0])
@@ -89,38 +88,28 @@ def plot_trials(csv):
 	data['epsilon'] = data['parameters'].apply(lambda x: ast.literal_eval(x)['e']) 
 	data['alpha'] = data['parameters'].apply(lambda x: ast.literal_eval(x)['a']) 
 
-
-	# Create training and testing subsets
+	#### Create Training and Testing Subsets
 	training_data = data[data['testing'] == False]
 	testing_data = data[data['testing'] == True]
 
 	plt.figure(figsize=(12,8))
 
-
-	###############
-	### Average step reward plot
-	###############
-	
+	#### Average Step Reward Plot	
 	ax = plt.subplot2grid((6,6), (0,3), colspan=3, rowspan=2)
 	ax.set_title("10-Trial Rolling Average Reward per Action")
 	ax.set_ylabel("Reward per Action")
 	ax.set_xlabel("Trial Number")
 	ax.set_xlim((10, len(training_data)))
 
-	# Create plot-specific data
+	#### Create Plot-Specific Data
 	step = training_data[['trial','average_reward']].dropna()
-
 	ax.axhline(xmin = 0, xmax = 1, y = 0, color = 'black', linestyle = 'dashed')
 	ax.plot(step['trial'], step['average_reward'])
 
-
-	###############
-	### Parameters Plot
-	###############
-
+	#### Parameters Plot
 	ax = plt.subplot2grid((6,6), (2,3), colspan=3, rowspan=2)
 
-	# Check whether the agent was expected to learn
+	#### Check Whether the Agent was Expected to Learn
 	if csv != 'sim_no-learning.csv':
 		ax.set_ylabel("Parameter Value")
 		ax.set_xlabel("Trial Number")
@@ -136,11 +125,7 @@ def plot_trials(csv):
 		ax.axis('off')
 		ax.text(0.52, 0.30, "Simulation completed\nwith learning disabled.", fontsize=24, ha='center', style='italic')	
 
-
-	###############
-	### Bad Actions Plot
-	###############
-	
+	#### Bad Actions Plot
 	actions = training_data[['trial','good', 'minor','major','minor_acc','major_acc']].dropna()
 	maximum = (1 - actions['good']).values.max()
 	
@@ -162,11 +147,7 @@ def plot_trials(csv):
 	
 	ax.legend(loc='upper right', fancybox=True, fontsize=10)
 
-
-	###############
-	### Rolling Success-Rate plot
-	###############
-	
+	#### Rolling Success-Rate Plot	
 	ax = plt.subplot2grid((6,6), (4,0), colspan=4, rowspan=2)
 	ax.set_title("10-Trial Rolling Rate of Reliability")
 	ax.set_ylabel("Rate of Reliability")
@@ -176,18 +157,14 @@ def plot_trials(csv):
 	ax.set_yticks(np.arange(0, 101, 20))
 	ax.set_yticklabels(['0%', '20%', '40%', '60%', '80%', '100%'])
 
-	# Create plot-specific data
+	#### Create Plot-Specific Data
 	trial = training_data.dropna()['trial']
 	rate = training_data.dropna()['reliability_rate']
 
-	# Rolling success rate
+	#### Rolling Success Rate
 	ax.plot(trial, rate, label="Reliability Rate", color='blue')
 
-
-	###############
-	### Test results
-	###############
-
+	#### Test Results
 	ax = plt.subplot2grid((6,6), (4,4), colspan=2, rowspan=2)
 	ax.axis('off')
 
@@ -195,7 +172,7 @@ def plot_trials(csv):
 		safety_rating, safety_color = calculate_safety(testing_data)
 		reliability_rating, reliability_color = calculate_reliability(testing_data)
 
-		# Write success rate
+		##### Write Success Rate
 		ax.text(0.40, .9, "{} testing trials simulated.".format(len(testing_data)), fontsize=14, ha='center')
 		ax.text(0.40, 0.7, "Safety Rating:", fontsize=16, ha='center')
 		ax.text(0.40, 0.42, "{}".format(safety_rating), fontsize=40, ha='center', color=safety_color)
