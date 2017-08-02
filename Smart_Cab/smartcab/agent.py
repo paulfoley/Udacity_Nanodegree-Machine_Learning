@@ -118,9 +118,6 @@ class LearningAgent(Agent):
         self.next_waypoint = self.planner.next_waypoint()
         action = None
 
-        ########### 
-        ## TO DO ##
-        ###########
         # When not learning, choose a random action
         if self.learning == False:
             action_number = random.randint(0, 3)
@@ -197,7 +194,7 @@ def run():
     #   display      - set to False to disable the GUI if PyGame is enabled
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
-    sim = Simulator(env, update_delay=.01, log_metrics = True, display = False)
+    sim = Simulator(env, update_delay=.01, log_metrics = True, display = True)
     
     ##############
     # Run the simulator

@@ -1,18 +1,19 @@
-## Creates the Environment for the Smart Cab
+'''
+Creates the environment for the smart cab to drive in.
+'''
 
-# Imports
+## Imports
 import time
 import random
 import math
 from collections import OrderedDict
 from simulator import Simulator
 
-# Creates Classes
+## Creates Classes
 class TrafficLight(object):
     """
     A traffic light that switches periodically.
     """
-
     valid_states = [True, False]  # True = NS open; False = EW open
 
     def __init__(self, state=None, period=None):
@@ -46,14 +47,14 @@ class Environment(object):
         self.num_dummies = num_dummies  # Number of dummy driver agents in the environment
         self.verbose = verbose # If debug output should be given
 
-        # Initialize simulation variables
+        #### Initialize simulation variables
         self.done = False
         self.t = 0
         self.agent_states = OrderedDict()
         self.step_data = {}
         self.success = None
 
-        # Road network
+        #### Road network
         self.grid_size = grid_size  # (columns, rows)
         self.bounds = (1, 2, self.grid_size[0], self.grid_size[1] + 1)
         self.block_size = 100
@@ -71,7 +72,7 @@ class Environment(object):
                 if (abs(a[0] - b[0]) + abs(a[1] - b[1])) == 1:  # L1 distance = 1
                     self.roads.append((a, b))
 
-        # Add environment boundaries
+        #### Add environment boundaries
         for x in range(self.bounds[0], self.bounds[2] + 1):
             self.roads.append(((x, self.bounds[1] - self.hang), (x, self.bounds[1])))
             self.roads.append(((x, self.bounds[3] + self.hang), (x, self.bounds[3])))
@@ -79,7 +80,7 @@ class Environment(object):
             self.roads.append(((self.bounds[0] - self.hang, y), (self.bounds[0], y)))
             self.roads.append(((self.bounds[2] + self.hang, y), (self.bounds[2], y)))    
 
-        # Create dummy agents
+        #### Create dummy agents
         for i in range(self.num_dummies):
             self.create_agent(DummyAgent)
 
@@ -102,9 +103,8 @@ class Environment(object):
         """
         When called, create_agent creates an agent in the environment.
         """
-
         agent = agent_class(self, *args, **kwargs)
-        self.agent_states[agent] = {'location': random.choice(self.intersections.keys()), 'heading': (0, 1)}
+        self.agent_states[agent] = {'location': random.choice(list(self.intersections.keys())), 'heading': (0, 1)}
         return agent
 
     def set_primary_agent(self, agent, enforce_deadline=False):
@@ -112,7 +112,6 @@ class Environment(object):
         When called, set_primary_agent sets 'agent' as the primary agent.
         The primary agent is the smartcab that is followed in the environment.
         """
-
         self.primary_agent = agent
         agent.primary_agent = True
         self.enforce_deadline = enforce_deadline
@@ -121,25 +120,24 @@ class Environment(object):
         """
         This function is called at the beginning of a new trial.
         """
-
         self.done = False
         self.t = 0
 
-        # Reset status text
+        #### Reset status text
         self.step_data = {}
 
-        # Reset traffic lights
-        for traffic_light in self.intersections.itervalues():
+        #### Reset traffic lights
+        for traffic_light in self.intersections.values():
             traffic_light.reset()
 
-        # Pick a start and a destination
-        start = random.choice(self.intersections.keys())
-        destination = random.choice(self.intersections.keys())
+        #### Pick a start and a destination
+        start = random.choice(list(self.intersections.keys()))
+        destination = random.choice(list(self.intersections.keys()))
 
-        # Ensure starting location and destination are not too close
+        #### Ensure starting location and destination are not too close
         while self.compute_dist(start, destination) < 4:
-            start = random.choice(self.intersections.keys())
-            destination = random.choice(self.intersections.keys())
+            start = random.choice(list(self.intersections.keys()))
+            destination = random.choice(list(self.intersections.keys()))
 
         start_heading = random.choice(self.valid_headings)
         distance = self.compute_dist(start, destination)
@@ -147,15 +145,15 @@ class Environment(object):
         if(self.verbose == True): # Debugging
             print("Environment.reset(): Trial set up with start = {}, destination = {}, deadline = {}".format(start, destination, deadline))
 
-        # Create a map of all possible initial positions
+        #### Create a map of all possible initial positions
         positions = dict()
         for location in self.intersections:
             positions[location] = list()
             for heading in self.valid_headings:
                 positions[location].append(heading)
 
-        # Initialize agent(s)
-        for agent in self.agent_states.iterkeys():
+        #### Initialize agent(s)
+        for agent in self.agent_states.keys():
 
             if agent is self.primary_agent:
                 self.agent_states[agent] = {
@@ -164,10 +162,10 @@ class Environment(object):
                     'destination': destination,
                     'deadline': deadline
                 }
-            # For dummy agents, make them choose one of the available 
-            # intersections and headings still in 'positions'
+            #### For dummy agents, make them choose one of the available 
+            #### intersections and headings still in 'positions'
             else:
-                intersection = random.choice(positions.keys())
+                intersection = random.choice(list(positions.keys()))
                 heading = random.choice(positions[intersection])
                 self.agent_states[agent] = {
                     'location': intersection,
@@ -175,7 +173,7 @@ class Environment(object):
                     'destination': None,
                     'deadline': None
                 }
-                # Now delete the taken location and heading from 'positions'
+                #### Now delete the taken location and heading from 'positions'
                 positions[intersection] = list(set(positions[intersection]) - set([heading]))
                 if positions[intersection] == list(): # No headings available for intersection
                     del positions[intersection] # Delete the intersection altogether
@@ -183,7 +181,7 @@ class Environment(object):
     
             agent.reset(destination=(destination if agent is self.primary_agent else None), testing=testing)
             if agent is self.primary_agent:
-                # Reset metrics for this trial (step data will be set during the step)
+                #### Reset metrics for this trial (step data will be set during the step)
                 self.trial_data['testing'] = testing
                 self.trial_data['initial_deadline'] = deadline
                 self.trial_data['final_deadline'] = deadline
@@ -196,8 +194,7 @@ class Environment(object):
         """
         This function is called when a time step is taken turing a trial.
         """
-
-        # Pretty print to terminal
+        #### Pretty print to terminal
         print("")
         print("/-------------------")
         print("| Step {} Results".format(self.t))
@@ -207,20 +204,20 @@ class Environment(object):
         if(self.verbose == True): # Debugging
             print("Environment.step(): t = {}".format(self.t))
 
-        # Update agents, primary first
+        #### Update agents, primary first
         if self.primary_agent is not None:
             self.primary_agent.update()
 
-        for agent in self.agent_states.iterkeys():
+        for agent in self.agent_states.keys():
             if agent is not self.primary_agent:
                 agent.update()
 
-        # Update traffic lights
-        for intersection, traffic_light in self.intersections.iteritems():
+        #### Update traffic lights
+        for intersection, traffic_light in self.intersections.items():
             traffic_light.update(self.t)
 
         if self.primary_agent is not None:
-            # Agent has taken an action: reduce the deadline by 1
+            #### Agent has taken an action: reduce the deadline by 1
             agent_deadline = self.agent_states[self.primary_agent]['deadline'] - 1
             self.agent_states[self.primary_agent]['deadline'] = agent_deadline
 
@@ -242,7 +239,6 @@ class Environment(object):
         This function is called when information is requested 
         about the sensor inputs from an 'agent' in the environment.
         """
-
         assert agent in self.agent_states, "Unknown agent!"
 
         state = self.agent_states[agent]
@@ -250,15 +246,15 @@ class Environment(object):
         heading = state['heading']
         light = 'green' if (self.intersections[location].state and heading[1] != 0) or ((not self.intersections[location].state) and heading[0] != 0) else 'red'
 
-        # Populate oncoming, left, right
+        #### Populate oncoming, left, right
         oncoming = None
         left = None
         right = None
-        for other_agent, other_state in self.agent_states.iteritems():
+        for other_agent, other_state in self.agent_states.items():
             if agent == other_agent or location != other_state['location'] or (heading[0] == other_state['heading'][0] and heading[1] == other_state['heading'][1]):
                 continue
-            # For dummy agents, ignore the primary agent
-            # This is because the primary agent is not required to follow the waypoint
+            #### For dummy agents, ignore the primary agent
+            #### This is because the primary agent is not required to follow the waypoint
             if other_agent == self.primary_agent:
                 continue
             other_heading = other_agent.get_next_waypoint()
@@ -278,7 +274,6 @@ class Environment(object):
         """
         Returns the deadline remaining for an agent.
         """
-
         return self.agent_states[agent]['deadline'] if agent is self.primary_agent else None
 
     def act(self, agent, action):
@@ -286,7 +281,6 @@ class Environment(object):
         Consider an action and perform the action if it is legal.
         Receive a reward for the agent based on traffic laws.
         """
-
         assert agent in self.agent_states, "Unknown agent!"
         assert action in self.valid_actions, "Invalid action!"
 
@@ -295,40 +289,40 @@ class Environment(object):
         heading = state['heading']
         light = 'green' if (self.intersections[location].state and heading[1] != 0) or ((not self.intersections[location].state) and heading[0] != 0) else 'red'
         inputs = self.sense(agent)
-
-        # Assess whether the agent can move based on the action chosen.
-        # Either the action is okay to perform, or falls under 4 types of violations:
-        # 0: Action okay
-        # 1: Minor traffic violation
-        # 2: Major traffic violation
-        # 3: Minor traffic violation causing an accident
-        # 4: Major traffic violation causing an accident
+        '''
+        Assess whether the agent can move based on the action chosen.
+        Either the action is okay to perform, or falls under 4 types of violations:
+        0: Action okay
+        1: Minor traffic violation
+        2: Major traffic violation
+        3: Minor traffic violation causing an accident
+        4: Major traffic violation causing an accident
+        '''
         violation = 0
 
-        # Reward scheme
-        # First initialize reward uniformly random from [-1, 1]
+        #### Reward scheme, first initialize reward uniformly random from [-1, 1]
         reward = 2 * random.random() - 1
 
-        # Create a penalty factor as a function of remaining deadline
-        # Scales reward multiplicatively from [0, 1]
+        #### Create a penalty factor as a function of remaining deadline
+        #### Scales reward multiplicatively from [0, 1]
         fnc = self.t * 1.0 / (self.t + state['deadline']) if agent.primary_agent else 0.0
         gradient = 10
         
-        # No penalty given to an agent that has no enforced deadline
+        #### No penalty given to an agent that has no enforced deadline
         penalty = 0
 
-        # If the deadline is enforced, give a penalty based on time remaining
+        #### If the deadline is enforced, give a penalty based on time remaining
         if self.enforce_deadline:
             penalty = (math.pow(gradient, fnc) - 1) / (gradient - 1)
 
-        # Agent wants to drive forward:
+        #### Agent wants to drive forward:
         if action == 'forward':
             if light != 'green': # Running red light
                 violation = 2 # Major violation
                 if inputs['left'] == 'forward' or inputs['right'] == 'forward': # Cross traffic
                     violation = 4 # Accident
         
-        # Agent wants to drive left:
+        #### Agent wants to drive left:
         elif action == 'left':
             if light != 'green': # Running a red light
                 violation = 2 # Major violation
@@ -339,38 +333,38 @@ class Environment(object):
             else: # Green light
                 heading = (heading[1], -heading[0]) # Valid move. We assume the cab will wait for the lane to be clear on a green light, before taking the left turn.
 
-        # Agent wants to drive right:
+        #### Agent wants to drive right:
         elif action == 'right':
             if light != 'green' and inputs['left'] == 'forward': # Cross traffic
                 violation = 3 # Accident
             else: # Valid move!
                 heading = (-heading[1], heading[0])
 
-        # Agent wants to perform no action:
+        #### Agent wants to perform no action:
         elif action == None:
             if light == 'green': 
                 violation = 1 # Minor violation
 
 
-        # Did the agent attempt a valid move?
+        #### Did the agent attempt a valid move?
         if violation == 0:
             if action == agent.get_next_waypoint(): # Was it the correct action?
                 reward += 2 - penalty # (2, 1)
             elif action == None and light != 'green' and agent.get_next_waypoint() == 'right':
-                # valid action but incorrect (idling at red light, when we should have gone right on red)
+                ##### Valid action but incorrect (idling at red light, when we should have gone right on red)
                 reward += 1 - penalty # (1, 0)
             elif action == None and light != 'green': # Was the agent stuck at a red light?
                 reward += 2 - penalty # (2, 1)
-            else: # Valid but incorrect
+            else: ##### Valid but incorrect
                 reward += 1 - penalty # (1, 0)
 
-            # Move the agent
+            ##### Move the agent
             if action is not None:
                 location = ((location[0] + heading[0] - self.bounds[0]) % (self.bounds[2] - self.bounds[0] + 1) + self.bounds[0],
                             (location[1] + heading[1] - self.bounds[1]) % (self.bounds[3] - self.bounds[1] + 1) + self.bounds[1])  # wrap-around
                 state['location'] = location
                 state['heading'] = heading
-        # Agent attempted invalid move
+        #### Agent attempted invalid move
         else:
             if violation == 1: # Minor violation
                 reward += -5
@@ -381,14 +375,14 @@ class Environment(object):
             elif violation == 4: # Major accident
                 reward += -40
 
-        # Did agent reach the goal after a valid move?
+        #### Did agent reach the goal after a valid move?
         if agent is self.primary_agent:
             if state['location'] == state['destination']:
-                # Did agent get to destination before deadline?
+                ##### Did agent get to destination before deadline?
                 if state['deadline'] >= 0:
                     self.trial_data['success'] = 1
                 
-                # Stop the trial
+                ##### Stop the trial
                 self.done = True
                 self.success = True
 
@@ -398,7 +392,7 @@ class Environment(object):
             if(self.verbose == True): # Debugging
                 print("Environment.act() [POST]: location: {}, heading: {}, action: {}, reward: {}".format(location, heading, action, reward))
 
-            # Update metrics
+            ##### Update metrics
             self.step_data['t'] = self.t
             self.step_data['violation'] = violation
             self.step_data['state'] = agent.get_state()
@@ -421,7 +415,6 @@ class Environment(object):
         """
         Compute the Manhattan (L1) distance of a spherical world.
         """
-
         dx1 = abs(b[0] - a[0])
         dx2 = abs(self.grid_size[0] - dx1)
         dx = dx1 if dx1 < dx2 else dx2
@@ -437,7 +430,6 @@ class Agent(object):
     """
     Base class for all agents.
     """
-
     def __init__(self, env):
         self.env = env
         self.state = None
@@ -469,10 +461,9 @@ class DummyAgent(Agent):
         """
         Update a DummyAgent to move randomly under legal traffic laws.
         """
-
         inputs = self.env.sense(self)
 
-        # Check if the chosen waypoint is safe to move to.
+        #### Check if the chosen waypoint is safe to move to.
         action_okay = True
         if self.next_waypoint == 'right':
             if inputs['light'] == 'red' and inputs['left'] == 'forward':
@@ -484,7 +475,7 @@ class DummyAgent(Agent):
             if inputs['light'] == 'red' or (inputs['oncoming'] == 'forward' or inputs['oncoming'] == 'right'):
                 action_okay = False
 
-        # Move to the next waypoint and choose a new one.
+        #### Move to the next waypoint and choose a new one.
         action = None
         if action_okay:
             action = self.next_waypoint
