@@ -1,6 +1,6 @@
 # Project - Finding Donors for CharityML
 
-As any charity organization knows, finding donors can be extremely difficult. However, by learning from the features of previous donors maybe we can help a charity recognize the people that are most likely to donate.
+As any charity organization knows, finding donors can be extremely difficult. However, by learning about the features of previous donors maybe we can help a charity recognize the people that are most likely to donate.
 
 
 ## Project Overview
