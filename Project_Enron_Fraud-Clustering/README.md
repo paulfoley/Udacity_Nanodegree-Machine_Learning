@@ -1,7 +1,7 @@
 # Project - Investigate Enron Fraud
 
 In 2000, Enron was one of the largest companies in the United States. 
-By 2002, it had collapsed into bankruptcy due to widespread corporate fraud. In the resulting Federal investigation, there was a significant amount of typically confidential information entered into public record, including tens of thousands of emails and detailed financial data for top executives. 
+By 2002, it had collapsed into bankruptcy due to widespread corporate fraud. In the resulting federal investigation, there was a significant amount of typically confidential information entered into public record, including tens of thousands of emails and detailed financial data for top executives. 
 
 
 ## Project Overview
@@ -24,7 +24,7 @@ You'll need to install:
 
 ### Data Files
 
-* `dataset.pkl` - The dataset for the project, there are 146 people in the data set with 18 labeled as POI’s. From looking at the data, there are 1358 features that are missing values. The data has been wrangled and cleaned by [Udacity](https://www.udacity.com/).
+* `dataset.pkl` - The dataset for the project. There are 146 people in the data set with 18 labeled as POI’s. From looking at the data, there are 1358 features that are missing values. The data has been wrangled and cleaned by [Udacity](https://www.udacity.com/).
 
 #### Outliers
 
