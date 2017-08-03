@@ -48,7 +48,7 @@ You'll need to install:
 
 ## Python Notebook and Scripts
 
-* `Boston_Housing_Prices.ipynb` - Main project file, an IPython Notbook that contains the analysis for the project.
+* `Boston_Housing_Prices.ipynb` - Main project file, an IPython Notebook that contains the analysis for the project.
 * `visuals.py` - A Python script containing visualization code that is run behind the scenes.
 
 ### Opening the Jupyter Notebook
