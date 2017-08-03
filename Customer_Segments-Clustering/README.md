@@ -2,7 +2,7 @@
 
 Many companies today collect vast amounts of data on customers and clientele, and have a strong desire to understand the meaningful relationships hidden in their customer base. Knowing this information can assist the company in engineering future products and services that best satisfy the demands or needs of their customers.
 
-For example, in this project a wholesale distributor, recently tested a change to their delivery method for some customers. By moving from a morning delivery service five days a week to a cheaper evening delivery service three days a week. Initial testing did not discover any significant unsatisfactory results, so they implemented the cheaper option for all customers. Almost immediately, the distributor began getting complaints about the delivery service change and customers were canceling deliveries. This caused the distributor to lose more money than what was being saved. Let's help the wholesale distributor find what types of customers they have, to help them make better and more informed business decisions in the future.
+For example, in this project a wholesale distributor recently tested a change to their delivery method for some customers. They moved from a morning delivery service five days a week to a cheaper evening delivery service three days a week. Initial testing did not discover any significant unsatisfactory results, so they implemented the cheaper option for all customers. Almost immediately, the distributor began getting complaints about the delivery service change and customers were canceling deliveries. This caused the distributor to lose more money than what was being saved. Let's help the wholesale distributor find what types of customers they have, to help them make better and more informed business decisions in the future.
 
 ## Project Overview
 
@@ -46,7 +46,7 @@ You'll need to install:
 * `Grocery` - Annual spending (m.u.) on grocery products (Continuous)
 * `Frozen` - Annual spending (m.u.) on frozen products (Continuous)
 * `Detergents_Paper` - Annual spending (m.u.) on detergents and paper products (Continuous)
-* `Delicatessen` - Annual spending (m.u.) on and delicatessen products (Continuous)
+* `Delicatessen` - Annual spending (m.u.) on delicatessen products (Continuous)
 * `Channel` - {Hotel/Restaurant/Cafe - 1, Retail - 2} (Nominal)
 * `Region` - {Lisbon - 1, Oporto - 2, or Other - 3} (Nominal) 
 
