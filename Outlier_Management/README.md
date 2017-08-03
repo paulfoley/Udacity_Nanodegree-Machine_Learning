@@ -5,7 +5,7 @@ Outlier management is a critical skill in machine learning! To experiment with o
 
 ## Project Overview
 
-In this proejct we'll use the provided `practice_outliers_ages.pkl` and `practice_outliers_net_worths.pkl` datasets to see how outliers effect a [Linear Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) model.
+In this proejct we'll use the provided `practice_outliers_ages.pkl` and `practice_outliers_net_worths.pkl` datasets to see how outliers affect a [Linear Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) model.
 
 ### Project Steps
 
@@ -51,7 +51,7 @@ You'll need to install:
 
 ##### Conclusion
 
-As we can see the [Linear Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) model fits the data better when the outliers have been removed.
+As we can see, the [Linear Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) model fits the data better when the outliers have been removed.
 
 
 ## Authors
