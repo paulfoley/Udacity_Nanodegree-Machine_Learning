@@ -46,7 +46,7 @@ You'll need to install:
 
 ##### Conclusion
 
-The [Logistic Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html) model underfits the data! As neither the training score or the cross-validation score are close to 1.
+The [Logistic Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html) model underfits the data! Neither the training score or the cross-validation score are close to 1.
 
 #### Gradient Boosting Classifier
 
@@ -62,7 +62,7 @@ The [Gradient Boosting Classifier](http://scikit-learn.org/stable/modules/genera
 
 ##### Conclusion
 
-The [Support Vector Classifier](http://scikit-learn.org/stable/modules/svm.html) model overfits the data! While the training score is 1, the cross-validation score is below .6. Which makes us think that this model just memorized the training data and doesn't generalize well to the population data.
+The [Support Vector Classifier](http://scikit-learn.org/stable/modules/svm.html) model overfits the data! While the training score is 1, the cross-validation score is below .6. This makes us think that this model just memorized the training data and doesn't generalize well to the population data.
 
 
 ## Authors
